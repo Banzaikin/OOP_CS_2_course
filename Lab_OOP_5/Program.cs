@@ -7,18 +7,18 @@ namespace Lab_OOP_5
     class Program
     {
         //заполнение одномерного массива вручную
-        static int[] CreateArrayManually(int len)
+        static double[] CreateArrayManually(int len)
         {
-            int[] nums1 = new int[len];
+            double[] nums1 = new double[len];
             for (int i = 0; i < len; i++)
-                nums1[i] = InputInt("Введите " + (i + 1) + " элемент массива: ");
+                nums1[i] = InputDouble("Введите " + (i + 1) + " элемент массива: ");
             Array.Sort(nums1);
             return nums1;
         }
         //заполнение одномерного массива случайными элементами
-        static int[] CreateArrayRandom(int len)
+        static double[] CreateArrayRandom(int len)
         {
-            int[] nums1 = new int[len];
+            double[] nums1 = new double[len];
             Console.WriteLine("Введите диапазон задания случайных чисел: ");
             int left = InputInt("Введите левую границу: ");
             int right = InputInt("Введите правую границу: ");
@@ -33,14 +33,14 @@ namespace Lab_OOP_5
             return nums1;
         }
         //удаление среднего арифметического из массива
-        static int[] RemovingArithmeticMean(int[] nums1, int len)
+        static double[] RemovingArithmeticMean(double[] nums1, int len)
         {
-            int sum = 0;
-            foreach (int i in nums1)
+            double sum = 0;
+            foreach (double i in nums1)
                 sum += i;
             if (len != 0)
             {
-                int arithmeticMean = sum / len;
+                double arithmeticMean = sum / len;
                 nums1 = nums1.Where(s => s != arithmeticMean).ToArray();
             }
             else
@@ -87,12 +87,7 @@ namespace Lab_OOP_5
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j <= length; j++)
-                {
-                    if (j == length)
-                        numsNew[i, j] = InputInt("Введите " + (i + 1) + " элемент столбца: ");
-                    else
-                        numsNew[i, j] = nums2[i, j];
-                }
+                    numsNew[i, j] = (j == length) ? (InputInt("Введите " + (i + 1) + " элемент столбца: ")) : (nums2[i, j]);
             }
             return numsNew;
         }
@@ -108,13 +103,8 @@ namespace Lab_OOP_5
             {
                 for (int j = 0; j <= length; j++)
                 {
-                    if (j == length)
-                    {
-                        rnd.NextBytes(bytes);
-                        numsNew[i, j] = rnd.Next(left, right);
-                    }
-                    else
-                        numsNew[i, j] = nums2[i, j];
+                    rnd.NextBytes(bytes);
+                    numsNew[i, j] = (j == length) ? (InputInt("Введите " + (i + 1) + " элемент столбца: ")) : (nums2[i, j]);
                 }
             }
             return numsNew;
@@ -164,6 +154,8 @@ namespace Lab_OOP_5
             {
                 int length = nums3[i].Length;
                 numsNew[i] = new int[length];
+                if (length == 0)
+                    break;
                 for (int j = 0; j < length; j++)
                 {
                     numsNew[i][j] = nums3[i][j];
@@ -177,18 +169,18 @@ namespace Lab_OOP_5
             int z = 0;
             for (int i = 0; i < height; i++)
             {
-                if (numsNew[i][0] == 0)
-                    continue;
                 int length = numsNew[i].Length;
                 resArr[z] = new int[length];
+                if (length == 0)
+                    break;
+                if (numsNew[i][0] == 0)
+                    continue;
                 for (int j = 0; j < length; j++)
                     resArr[z][j] = numsNew[i][j];
                 z++;
             }
             return resArr;
         }
-
-
         //проверка на ввод целого числа
         static int InputInt(string message)
         {
@@ -222,8 +214,22 @@ namespace Lab_OOP_5
             return number;
         }
 
+        //проверка на пустой одномерный массив
+        static bool EmptyArr(int lenArr)
+        {
+            if (lenArr == 0)
+                Console.WriteLine("Массив пустой!");
+            return (lenArr == 0);
+        }
+        //проверка на пустую матрицу
+        static bool EmptyArr(int height, int width)
+        {
+            if (height == 0 && width == 0)
+                Console.WriteLine("матрица пустая!");
+            return (height == 0 && width == 0);
+        }
         //вывод на экран одномерного массива
-        static void OutputArr1(int[] nums)
+        static void OutputArr1(double[] nums)
         {
             for (int i = 0; i < nums.Length; i++)
                 Console.Write(nums[i] + " ");
@@ -245,8 +251,18 @@ namespace Lab_OOP_5
         //вывод на экран рванного массива
         static void OutputArr3(int[][] nums)
         {
+            if (nums == null)
+            {
+                Console.WriteLine("Пусто!");
+                return;
+            } 
             foreach (int[] row in nums)
             {
+                if (row == null)
+                {
+                    Console.WriteLine("Пусто!");
+                    return;
+                }
                 foreach (int number in row)
                     Console.Write(number + " ");
                 Console.WriteLine();
@@ -270,8 +286,9 @@ namespace Lab_OOP_5
             };
             int lenArr = 0;
             int height = 0;
+            int width = 0;
             int numArr = 0;
-            int[] nums1 = new int[lenArr];
+            double[] nums1 = new double[lenArr];
             int[,] nums2 = new int[height, lenArr];
             int[][] nums3 = new int[numArr][];
             bool isWork = true;
@@ -288,13 +305,13 @@ namespace Lab_OOP_5
                 {
                     case 1: //Создание одномерного массива(заполнение вручную)
                         lenArr = InputInt("\nВведите размер массива: ");
-                        nums1 = new int[lenArr];
+                        nums1 = new double[lenArr];
                         nums1 = CreateArrayManually(lenArr);
                         OutputArr1(nums1);
                         break;
                     case 2: //Создание одномерного массива (заполнение рандомно)
                         lenArr = InputInt("\nВведите размер массива: ");
-                        nums1 = new int[lenArr];
+                        nums1 = new double[lenArr];
                         nums1 = CreateArrayRandom(lenArr);
                         OutputArr1(nums1);
                         break;
@@ -304,24 +321,28 @@ namespace Lab_OOP_5
                         break;
                     case 4: //Создание двумерного массива (заполнение вручную)
                         height = InputInt("\nВведите количество строк в матрице: ");
-                        lenArr = InputInt("\nВведите количество столбцов в матрице: ");
-                        nums2 = new int[height, lenArr];
-                        nums2 = CreateArrayManually(height, lenArr);
+                        width = InputInt("\nВведите количество столбцов в матрице: ");
+                        nums2 = new int[height, width];
+                        nums2 = CreateArrayManually(height, width);
                         OutputArr2(nums2);
                         break;
                     case 5: //Создание двумерного массива (заполнение рандомно)
                         height = InputInt("\nВведите количество строк в матрице: ");
-                        lenArr = InputInt("\nВведите количество столбцов в матрице: ");
-                        nums2 = new int[height, lenArr];
-                        nums2 = CreateArrayRandom(height, lenArr);
+                        width = InputInt("\nВведите количество столбцов в матрице: ");
+                        nums2 = new int[height, width];
+                        nums2 = CreateArrayRandom(height, width);
                         OutputArr2(nums2);
                         break;
                     case 6: //Добавление столбца в конец матрицы (заполнение вручную)
-                        nums2 = AddColumnManually(nums2, height, lenArr);
+                        if (EmptyArr(height, width))
+                            break;
+                        nums2 = AddColumnManually(nums2, height, width);
                         OutputArr2(nums2);
                         break;
                     case 7: //Добавление столбца в конец матрицы (заполнение рандомно)
-                        nums2 = AddColumnRandom(nums2, height, lenArr);
+                        if (EmptyArr(height, width))
+                            break;
+                        nums2 = AddColumnRandom(nums2, height, width);
                         OutputArr2(nums2);
                         break;
                     case 8: //Создание рванного массива (заполнение вручную)
@@ -337,6 +358,8 @@ namespace Lab_OOP_5
                         OutputArr3(nums3);
                         break;
                     case 10: //Удаление из рванного массива строк, содержащие элемент K
+                        if (EmptyArr(numArr))
+                            break;
                         int k = InputInt("Введите k (удаление всех строк, содержащих k): ");
                         nums3 = DeletingRows(nums3, numArr, k);
                         OutputArr3(nums3);
