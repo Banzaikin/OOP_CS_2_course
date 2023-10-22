@@ -104,7 +104,7 @@ namespace Lab_OOP_5
                 for (int j = 0; j <= length; j++)
                 {
                     rnd.NextBytes(bytes);
-                    numsNew[i, j] = (j == length) ? (InputInt("Введите " + (i + 1) + " элемент столбца: ")) : (nums2[i, j]);
+                    numsNew[i, j] = (j == length) ? (rnd.Next(left, right)) : (nums2[i, j]);
                 }
             }
             return numsNew;
@@ -224,19 +224,19 @@ namespace Lab_OOP_5
         //проверка на пустую матрицу
         static bool EmptyArr(int height, int width)
         {
-            if (height == 0 && width == 0)
-                Console.WriteLine("матрица пустая!");
-            return (height == 0 && width == 0);
+            if (height == 0 || width == 0)
+                Console.WriteLine("Матрица пустая!");
+            return (height == 0 || width == 0);
         }
         //вывод на экран одномерного массива
-        static void OutputArr1(double[] nums)
+        static void OutputArr(double[] nums)
         {
             for (int i = 0; i < nums.Length; i++)
                 Console.Write(nums[i] + " ");
             Console.WriteLine();
         }
         //вывод на экран матрицы
-        static void OutputArr2(int[,] nums)
+        static void OutputArr(int[,] nums)
         {
             int rows = nums.GetUpperBound(0) + 1;    // количество строк
             int columns = nums.Length / rows;        // количество столбцов
@@ -249,7 +249,7 @@ namespace Lab_OOP_5
             Console.WriteLine();
         }
         //вывод на экран рванного массива
-        static void OutputArr3(int[][] nums)
+        static void OutputArr(int[][] nums)
         {
             if (nums == null)
             {
@@ -305,64 +305,70 @@ namespace Lab_OOP_5
                 {
                     case 1: //Создание одномерного массива(заполнение вручную)
                         lenArr = InputInt("\nВведите размер массива: ");
+                        while (lenArr < 0)
+                            lenArr = InputInt("\nРазмер массива не может быть отрицательным! Введите размер массива: ");
                         nums1 = new double[lenArr];
                         nums1 = CreateArrayManually(lenArr);
-                        OutputArr1(nums1);
+                        OutputArr(nums1);
                         break;
                     case 2: //Создание одномерного массива (заполнение рандомно)
                         lenArr = InputInt("\nВведите размер массива: ");
                         nums1 = new double[lenArr];
                         nums1 = CreateArrayRandom(lenArr);
-                        OutputArr1(nums1);
+                        OutputArr(nums1);
                         break;
                     case 3: //Удаление среднего арифметического из одномерного массива
                         nums1 = RemovingArithmeticMean(nums1, lenArr);
-                        OutputArr1(nums1);
+                        OutputArr(nums1);
                         break;
                     case 4: //Создание двумерного массива (заполнение вручную)
                         height = InputInt("\nВведите количество строк в матрице: ");
                         width = InputInt("\nВведите количество столбцов в матрице: ");
+                        if (EmptyArr(height, width))
+                            break;
                         nums2 = new int[height, width];
                         nums2 = CreateArrayManually(height, width);
-                        OutputArr2(nums2);
+                        OutputArr(nums2);
                         break;
                     case 5: //Создание двумерного массива (заполнение рандомно)
                         height = InputInt("\nВведите количество строк в матрице: ");
                         width = InputInt("\nВведите количество столбцов в матрице: ");
+                        if (EmptyArr(height, width))
+                            break;
                         nums2 = new int[height, width];
                         nums2 = CreateArrayRandom(height, width);
-                        OutputArr2(nums2);
+                        OutputArr(nums2);
                         break;
                     case 6: //Добавление столбца в конец матрицы (заполнение вручную)
                         if (EmptyArr(height, width))
                             break;
                         nums2 = AddColumnManually(nums2, height, width);
-                        OutputArr2(nums2);
+                        OutputArr(nums2);
                         break;
                     case 7: //Добавление столбца в конец матрицы (заполнение рандомно)
                         if (EmptyArr(height, width))
                             break;
                         nums2 = AddColumnRandom(nums2, height, width);
-                        OutputArr2(nums2);
+                        OutputArr(nums2);
                         break;
                     case 8: //Создание рванного массива (заполнение вручную)
                         numArr = InputInt("\nВведите количество массивов: ");
                         nums3 = new int[numArr][];
                         nums3 = CreateArrayManually3(numArr);
-                        OutputArr3(nums3);
+                        OutputArr(nums3);
                         break;
                     case 9: //Создание рванного массива (заполнение рандомно)
                         numArr = InputInt("\nВведите количество массивов: ");
                         nums3 = new int[numArr][];
                         nums3 = CreateArrayRandom3(numArr);
-                        OutputArr3(nums3);
+                        OutputArr(nums3);
                         break;
                     case 10: //Удаление из рванного массива строк, содержащие элемент K
                         if (EmptyArr(numArr))
                             break;
                         int k = InputInt("Введите k (удаление всех строк, содержащих k): ");
                         nums3 = DeletingRows(nums3, numArr, k);
-                        OutputArr3(nums3);
+                        OutputArr(nums3);
                         break;
                     case 0: //Выход из программы
                         isWork = false;
