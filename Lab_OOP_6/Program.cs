@@ -57,6 +57,8 @@ namespace Lab_OOP_6
         //вывод на экран одномерного массива
         static void OutputArr(char[] arr)
         {
+            if (arr.Length == 0)
+                Console.WriteLine("Пустой массив!");
             for (int i = 0; i < arr.Length; i++)
                 Console.Write(arr[i] + " ");
             Console.WriteLine();
