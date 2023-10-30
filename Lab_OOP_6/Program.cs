@@ -73,25 +73,24 @@ namespace Lab_OOP_6
             return str;
         }
         //создание строки - заранее сформированный массив
-        static string CreateStringDefault()
+        static string[] CreateStringDefault()
         {
-            string[] arr = new string[10];
-            arr[0] = "Привет. ";
-            arr[1] = "Меня ";
-            arr[2] = "зовут ";
-            arr[3] = "Кирилл. ";
-            arr[4] = "Мне ";
-            arr[5] = "19 ";
-            arr[6] = "лет. ";
-            arr[7] = "Я ";
-            arr[8] = "люблю ";
-            arr[9] = "C#.";
-            string str = String.Join("", arr);
-            return str;
+            string[] arr = new string[5];
+            arr[0] = "Привет. Меня зовут Кирилл. Мне 19 лет. Я люблю C#.";
+            arr[1] = "Зима!";
+            arr[2] = "Мороз и солнце! День чудесный! Ещё ты дремлешь, друг прелестный.";
+            arr[3] = "Привет. Сколько сейчас времени?";
+            arr[4] = "1 предложение. 2 предложение? 3 предложение!";
+            return arr;
         }
         //Перестановка местами 1 и последнего предложения
         static string ReverseString(string str)
         {
+            if (str.Length == 0)
+            {
+                Console.WriteLine("Строка пустая!");
+                return str;
+            }
             string strCopy = str.Substring(0, str.Length - 1);
             int[] indexs1 = new int[3];
             int[] indexs2 = new int[3];
@@ -106,9 +105,13 @@ namespace Lab_OOP_6
             indexs1[2] = (indexs1[2] == -1) ? (100) : (indexs1[2]);
             int indexPEQ1 = indexs1.Min();
             int indexPEQ2 = indexs2.Max();
-            string substring1 = str.Substring(indexPEQ2 + 2, str.Length - indexPEQ2 - 2);
-            string substring2 = str.Substring(indexPEQ1 + 1, indexPEQ2 - indexPEQ1 + 1);
+            string substring1 = str.Substring(indexPEQ2 + 1, str.Length - indexPEQ2 - 1);
+            string substring2 = "";
+            if ((indexPEQ2 - indexPEQ1 + 1) > 0)
+                substring2 = str.Substring(indexPEQ1 + 1, indexPEQ2 - indexPEQ1 + 1);
             string substring3 = str.Substring(0, indexPEQ1 + 1);
+            if (substring1 == substring3)
+                substring3 = "";
             return (substring1 + substring2 + substring3);
         }
         //вывод строки
@@ -118,21 +121,28 @@ namespace Lab_OOP_6
         }
 
         //проверка на ввод целого числа
-        static int InputInt(string message)
+        static int InputInt(string message, int minValue = -2147483647, int maxValue = 2147483647)
         {
-            int number;
+            int number = -2147483648;
             Console.Write(message);
-            if (!int.TryParse(Console.ReadLine(), out number))
+            while (number < minValue || number > maxValue)
             {
-                do
+                if (!int.TryParse(Console.ReadLine(), out number))
                 {
-                    Console.WriteLine("Ошибка!");
-                    Console.WriteLine("Введите число типа int: ");
-                    Console.Write(message);
-                } while (!int.TryParse(Console.ReadLine(), out number));
+                    do
+                    {
+                        Console.WriteLine("Ошибка ввода! Невозможно распознать целое число");
+                        Console.Write(message);
+                    } while (!int.TryParse(Console.ReadLine(), out number));
+                }
+                if (number < minValue || number > maxValue)
+                {
+                    Console.WriteLine("Ошибка ввода! Значение {0} не входит в диапазон возможных, попробуйте снова... ", number);
+                }
             }
             return number;
         }
+
         //проверка на ввод char символа
         static char InputChar(string message)
         {
@@ -178,17 +188,13 @@ namespace Lab_OOP_6
                 switch(command)
                 {
                     case 1: //Создание одномерного массива - char (заполнение вручную)
-                        lenArr = InputInt("\nВведите размер массива: ");
-                        while (lenArr < 0)
-                            lenArr = InputInt("\nРазмер массива не может быть отрицательным! Введите размер массива: ");
+                        lenArr = InputInt("Введите размер массива: ", minValue: 0);
                         arr = new char[lenArr];
                         arr = CreateArrayManually(lenArr);
                         OutputArr(arr);
                         break;
                     case 2: //Создание одномерного массива - char (заполнение ДСЧ)
-                        lenArr = InputInt("\nВведите размер массива: ");
-                        while (lenArr < 0)
-                            lenArr = InputInt("\nРазмер массива не может быть отрицательным! Введите размер массива: ");
+                        lenArr = InputInt("Введите размер массива: ", minValue: 0);
                         arr = new char[lenArr];
                         arr = CreateArrayRandom(lenArr);
                         OutputArr(arr);
@@ -204,7 +210,11 @@ namespace Lab_OOP_6
                         str = CreateString();
                         break;
                     case 6: //Заранее сформированный массив строк
-                        str = CreateStringDefault();
+                        string[] arrStr = CreateStringDefault();
+                        for (int i = 0; i < 5; i++)
+                            Console.WriteLine((i + 1) + ". " + arrStr[i]);
+                        int numStr = InputInt("Введите номер строки: ");
+                        str = arrStr[numStr - 1];
                         OutputString(str);
                         break;
                     case 7: //Поменять местами первое и последнее предложение в строке
@@ -221,7 +231,7 @@ namespace Lab_OOP_6
                         Console.WriteLine("Неправильная команда");
                         break;
                 }
-                Console.WriteLine("_____________________________________\n");
+                Console.WriteLine("Введите любую клавишу...\n_____________________________________\n");
                 Console.ReadKey();
             } while (command != 0);
         }
