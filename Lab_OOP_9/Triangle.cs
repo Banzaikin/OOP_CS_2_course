@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_9
 {
-    class Triangle
+    public class Triangle
     {
         private double a;
         private double b;
@@ -56,7 +56,7 @@ namespace Lab_OOP_9
         //существует треугольник или нет
         private static bool IsTriangle(Triangle trian)
         {
-            if ((trian.a > trian.b + trian.c) || (trian.b > trian.a + trian.c) || (trian.c > trian.a + trian.b))
+            if ((trian.a >= trian.b + trian.c) || (trian.b >= trian.a + trian.c) || (trian.c >= trian.a + trian.b))
                 return false;
             else
                 return true;
@@ -69,7 +69,7 @@ namespace Lab_OOP_9
         }
         public void Print()
         {
-            Console.WriteLine($"a: {a}\nb: {b}\nc: {c}\n");
+            Console.WriteLine($"a: {a}\nb: {b}\nc: {c}");
         }
         //возвращает полупериметр
         private static double CalculationP(Triangle side)
@@ -79,11 +79,17 @@ namespace Lab_OOP_9
         //вычисляет площадь
         public double CalculationS()
         {
-            return Math.Sqrt(CalculationP(this) * (CalculationP(this) - a) * (CalculationP(this) - b) * (CalculationP(this) - c));
+            if (IsTriangle(this))
+                return Math.Sqrt(CalculationP(this) * (CalculationP(this) - a) * (CalculationP(this) - b) * (CalculationP(this) - c));
+            else
+                return -1;
         }
         public static double CalculationS(Triangle side)
         {
-            return Math.Sqrt(CalculationP(side) * (CalculationP(side) - side.a) * (CalculationP(side) - side.b) * (CalculationP(side) - side.c));
+            if (IsTriangle(side))
+                return Math.Sqrt(CalculationP(side) * (CalculationP(side) - side.a) * (CalculationP(side) - side.b) * (CalculationP(side) - side.c));
+            else
+                return -1;
         }
         //перегрузка операций
         public static Triangle operator ++(Triangle trian)

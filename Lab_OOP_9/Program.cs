@@ -3,7 +3,7 @@ using System;
 
 namespace Lab_OOP_9
 {
-    class Program
+    public class Program
     {
         static void Task1()
         {
@@ -75,7 +75,7 @@ namespace Lab_OOP_9
 
             Console.WriteLine("Номер треугольника с самой маленькой площадью: " + NumElemMinS(array3));
         }
-        static int NumElemMinS(TriangleArray arr)
+        public static int NumElemMinS(TriangleArray arr)
         {
             int elemMinS = 0;
             if (arr.Size == 0)

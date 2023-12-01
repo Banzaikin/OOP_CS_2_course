@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_9
 {
-    class TriangleArray
+    public class TriangleArray
     {
         Triangle[] arr;
         static private int count = 0;
