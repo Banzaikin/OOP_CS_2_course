@@ -37,22 +37,7 @@ namespace Lab_OOP_9
         // число созданных объектов
         public static int Count() => count;
         public static void CounterErrase() => count = 0;
-        //ввод double значений
-        static double InputDouble(string message)
-        {
-            double number;
-            Console.Write(message);
-            if (!double.TryParse(Console.ReadLine(), out number))
-            {
-                do
-                {
-                    Console.WriteLine("Ошибка!");
-                    Console.WriteLine("Введите число типа double");
-                    Console.Write(message);
-                } while (!double.TryParse(Console.ReadLine(), out number));
-            }
-            return number;
-        }
+        
         //существует треугольник или нет
         private static bool IsTriangle(Triangle trian)
         {
@@ -63,13 +48,13 @@ namespace Lab_OOP_9
         }
         public void Read()
         {
-            a = InputDouble("Введите 1 сторону: ");
-            b = InputDouble("Введите 2 сторону: ");
-            c = InputDouble("Введите 3 сторону: ");
+            a = Menu.InputDouble("Введите 1 сторону: ");
+            b = Menu.InputDouble("Введите 2 сторону: ");
+            c = Menu.InputDouble("Введите 3 сторону: ");
         }
         public void Print()
         {
-            Console.WriteLine($"a: {a}\nb: {b}\nc: {c}");
+            Console.WriteLine($"a: {a}\nb: {b}\nc: {c}\n");
         }
         //возвращает полупериметр
         private static double CalculationP(Triangle side)

@@ -35,19 +35,19 @@ namespace Lab_OOP_9
             }
             count++;
         }
-        //конструктор с параметрами с вводом с клавиатуры
-        public TriangleArray(bool console)
-        {
-            Console.WriteLine("Введите новый размер массива: ");
-            int newSize = Convert.ToInt32(Console.ReadLine());
-            arr = new Triangle[newSize];
-            for (int i = 0; i < Size; i++)
-            {
-                arr[i] = new Triangle();
-                arr[i].Read();
-            }
-            count++;
-        }
+        ////конструктор с параметрами с вводом с клавиатуры
+        //public TriangleArray(bool console)
+        //{
+        //    Console.WriteLine("Введите новый размер массива: ");
+        //    int newSize = Convert.ToInt32(Console.ReadLine());
+        //    arr = new Triangle[newSize];
+        //    for (int i = 0; i < Size; i++)
+        //    {
+        //        arr[i] = new Triangle();
+        //        arr[i].Read();
+        //    }
+        //    count++;
+        //}
 
         //заранее известные элементы массива
         public TriangleArray(params Triangle[] Triangles)

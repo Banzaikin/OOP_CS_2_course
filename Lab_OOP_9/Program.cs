@@ -41,7 +41,8 @@ namespace Lab_OOP_9
         static void Task3()
         {
             Console.WriteLine("Задание 3");
-
+            Console.WriteLine("Введите Enter...");
+            Console.ReadKey();
             var array1 = new TriangleArray();
             Console.WriteLine("1 массив:");
             array1.Display();
@@ -63,8 +64,6 @@ namespace Lab_OOP_9
             array3.Display();
 
             Console.WriteLine();
-
-            Console.WriteLine("Кол-во созданных объектов: " + TriangleArray.Count());
 
             Console.WriteLine("Элемент под 3 номером: ");
             array3[2].Print();
