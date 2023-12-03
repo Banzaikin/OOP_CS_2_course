@@ -12,8 +12,8 @@ namespace Lab_OOP_9
             Triangle triangle = new Triangle();
             triangle.Read();
             triangle.Print();
-            Console.WriteLine("Метод класса. Площадь = " + triangle.CalculationS());
-            Console.WriteLine("Статическая функция. Площадь = " + Triangle.CalculationS(triangle));
+            Console.WriteLine("Метод класса. Площадь = " + triangle.CalculationS(triangle));
+            Console.WriteLine("Статическая функция. Площадь = " + Triangle.CalculationS(triangle.A, triangle.B, triangle.C));
             Console.WriteLine("Кол-во созданных объектов: " + Triangle.Count());
         }
         static void Task2()
@@ -82,16 +82,16 @@ namespace Lab_OOP_9
                 Console.WriteLine("Пусто!");
                 return 0;
             }
-            double MinS = Triangle.CalculationS(arr[0]);
-            elemMinS = 1;
-            for(int i = 1; i < arr.Size; i++)
-            {
-                if (MinS > Triangle.CalculationS(arr[i]))
-                {
-                    MinS = Triangle.CalculationS(arr[i]);
-                    elemMinS = i + 1;
-                }
-            }
+            //double MinS = Triangle.CalculationS(arr[0]);
+            //elemMinS = 1;
+            //for(int i = 1; i < arr.Size; i++)
+            //{
+            //    if (MinS > Triangle.CalculationS(arr[i]))
+            //    {
+            //        MinS = Triangle.CalculationS(arr[i]);
+            //        elemMinS = i + 1;
+            //    }
+            //}
             return elemMinS;
         }
         static void Main(string[] args)

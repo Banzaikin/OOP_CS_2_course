@@ -11,27 +11,42 @@ namespace Lab_OOP_9
         private double c;
         private static int count = 0;
         //свойства
-        public double SideA
+        public double A
         {
-            set { a = value; }
+            set 
+            {
+                while (value < 0)
+                    value = Menu.InputDouble("Сторона не может быть отрицательной, введите ещё раз: ");
+                a = value; 
+            }
             get { return a; }
         }
-        public double SideB
+        public double B
         {
-            set { b = value; }
+            set
+            {
+                while (value < 0)
+                    value = Menu.InputDouble("Сторона не может быть отрицательной, введите ещё раз: ");
+                b = value;
+            }
             get { return b; }
         }
-        public double SideC
+        public double C
         {
-            set { c = value; }
+            set
+            {
+                while (value < 0)
+                    value = Menu.InputDouble("Сторона не может быть отрицательной, введите ещё раз: ");
+                c = value;
+            }
             get { return c; }
         }
         //конструктор
         public Triangle(double a = 0, double b = 0, double c = 0)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            A = a;
+            B = b;
+            C = c;
             count++;
         }
         // число созданных объектов
@@ -39,73 +54,79 @@ namespace Lab_OOP_9
         public static void CounterErrase() => count = 0;
         
         //существует треугольник или нет
-        private static bool IsTriangle(Triangle trian)
+        private static bool IsTriangle(double A, double B, double C)
         {
-            if ((trian.a >= trian.b + trian.c) || (trian.b >= trian.a + trian.c) || (trian.c >= trian.a + trian.b))
+            if ((A >= B + C) || (B >= A + C) || (C >= A + B))
                 return false;
             else
                 return true;
         }
         public void Read()
         {
-            a = Menu.InputDouble("Введите 1 сторону: ");
-            b = Menu.InputDouble("Введите 2 сторону: ");
-            c = Menu.InputDouble("Введите 3 сторону: ");
+            A = Menu.InputDouble("Введите 1 сторону: ");
+            B = Menu.InputDouble("Введите 2 сторону: ");
+            C = Menu.InputDouble("Введите 3 сторону: ");
         }
         public void Print()
         {
             Console.WriteLine($"a: {a}\nb: {b}\nc: {c}\n");
         }
         //возвращает полупериметр
-        private static double CalculationP(Triangle side)
+        private static double CalculationP(double A, double B, double C)
         {
-            return (side.a + side.b + side.c) / 2;
+            return (A + B + C) / 2;
         }
         //вычисляет площадь
-        public double CalculationS()
+        public double CalculationS(Triangle trian)
         {
-            if (IsTriangle(this))
-                return Math.Sqrt(CalculationP(this) * (CalculationP(this) - a) * (CalculationP(this) - b) * (CalculationP(this) - c));
+            if (IsTriangle(trian.A, trian.B, trian.C))
+            {
+                double p = CalculationP(trian.A, trian.B, trian.C);
+                return Math.Sqrt(p * (p - trian.A) * (p - trian.B) * (p - trian.C));
+            }
             else
                 return -1;
         }
-        public static double CalculationS(Triangle side)
+        public static double CalculationS(double A, double B, double C)
         {
-            if (IsTriangle(side))
-                return Math.Sqrt(CalculationP(side) * (CalculationP(side) - side.a) * (CalculationP(side) - side.b) * (CalculationP(side) - side.c));
+            if (IsTriangle(A, B, C))
+            {
+                double p = CalculationP(A, B, C);
+                return Math.Sqrt(p * (p - A) * (p - B) * (p - C));
+            }
             else
                 return -1;
         }
         //перегрузка операций
         public static Triangle operator ++(Triangle trian)
         {
-            return new Triangle(++trian.a, ++trian.b, ++trian.c);
+            return new Triangle(++trian.A, ++trian.B, ++trian.C);
         }
         public static Triangle operator --(Triangle trian)
         {
-            return new Triangle(--trian.a, --trian.b, --trian.c);
+            return new Triangle(--trian.A, --trian.B, --trian.C);
         }
         //приведение к double (явная)
         public static explicit operator double(Triangle trian)
         {
-            if (IsTriangle(trian))
-                return CalculationS(trian);
+            if (IsTriangle(trian.A, trian.B, trian.C))
+                return CalculationS(trian.A, trian.B, trian.C);
             else
                 return (-1.0);
         }
         //приведение к bool (неявное)
         public static implicit operator bool(Triangle trian)
         {
-            return IsTriangle(trian);
+            return IsTriangle(trian.A, trian.B, trian.C);
         }
         //бинарные операции
         public static bool operator <=(Triangle t1, Triangle t2)
         {
-            return CalculationS(t1) <= CalculationS(t2);
+            return CalculationS(t1.A, t1.B, t1.C) <= CalculationS(t2.A, t2.B, t2.C);
         }
         public static bool operator >=(Triangle t1, Triangle t2)
         {
-            return CalculationS(t1) >= CalculationS(t2);
+            return CalculationS(t1.A, t1.B, t1.C) >= CalculationS(t2.A, t2.B, t2.C);
         }
     }
 }

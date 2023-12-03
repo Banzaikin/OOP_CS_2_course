@@ -19,7 +19,7 @@ namespace Lab_OOP_9.Tests
             double expectedArea = 6;
 
             // Act
-            double actualArea = triangle.CalculationS();
+            double actualArea = triangle.CalculationS(triangle);
 
             // Assert
             Assert.AreEqual(expectedArea, actualArea);
@@ -33,7 +33,7 @@ namespace Lab_OOP_9.Tests
             double expectedArea = -1;
 
             // Act
-            double actualArea = triangle.CalculationS();
+            double actualArea = Triangle.CalculationS(1, 2, 3);
 
             // Assert
             Assert.AreEqual(expectedArea, actualArea);
@@ -83,9 +83,9 @@ namespace Lab_OOP_9.Tests
             Triangle actualTriangle = ++triangle;
 
             // Assert
-            Assert.AreEqual(expectedTriangle.SideA, actualTriangle.SideA);
-            Assert.AreEqual(expectedTriangle.SideB, actualTriangle.SideB);
-            Assert.AreEqual(expectedTriangle.SideC, actualTriangle.SideC);
+            Assert.AreEqual(expectedTriangle.A, actualTriangle.A);
+            Assert.AreEqual(expectedTriangle.B, actualTriangle.B);
+            Assert.AreEqual(expectedTriangle.C, actualTriangle.C);
         }
 
         [TestMethod]
@@ -99,9 +99,9 @@ namespace Lab_OOP_9.Tests
             Triangle actualTriangle = --triangle;
 
             // Assert
-            Assert.AreEqual(expectedTriangle.SideA, actualTriangle.SideA);
-            Assert.AreEqual(expectedTriangle.SideB, actualTriangle.SideB);
-            Assert.AreEqual(expectedTriangle.SideC, actualTriangle.SideC);
+            Assert.AreEqual(expectedTriangle.A, actualTriangle.A);
+            Assert.AreEqual(expectedTriangle.B, actualTriangle.B);
+            Assert.AreEqual(expectedTriangle.C, actualTriangle.C);
         }
         [TestMethod]
         public void ExplicitOperatorTest()
