@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class Library : Organization
+    class Library : Organization, IInit, ICloneable, IComparable
     {
         private int numBook;
         public int NumBook
@@ -36,6 +36,8 @@ namespace Lab_OOP_10
         {
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Кол-во книг: {NumBook}\n");
+            var tagsRow = string.Join(", ", Tags);
+            Console.WriteLine("Теги: " + tagsRow);
         }
         //переопределение инициализации
         public override void Init()
@@ -49,6 +51,18 @@ namespace Lab_OOP_10
             base.RandomInit();
             var rnd = new Random();
             NumEmployess = rnd.Next(100, 10000);
+        }
+
+        public override object Clone()
+        {
+            var newProduct = (Library)this.MemberwiseClone();
+            newProduct.Tags = new List<string>(Tags);
+            return newProduct;
+        }
+
+        public override object ShallowCopy()
+        {
+            return (Library)MemberwiseClone();
         }
     }
 }

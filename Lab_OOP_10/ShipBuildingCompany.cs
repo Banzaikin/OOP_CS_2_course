@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class ShipBuildingCompany : InsuranceCompany
+    class ShipBuildingCompany : InsuranceCompany, IInit, ICloneable, IComparable
     {
         private int numShip;
         public int NumShip
@@ -37,6 +37,8 @@ namespace Lab_OOP_10
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Цена страховки: {Price}\n" +
                 $"Кол-во кораблей: {NumShip}");
+            var tagsRow = string.Join(", ", Tags);
+            Console.WriteLine("Теги: " + tagsRow);
         }
         public override void Init()
         {
@@ -48,6 +50,18 @@ namespace Lab_OOP_10
             base.RandomInit();
             var rnd = new Random();
             NumShip = rnd.Next(1, 10);
+        }
+
+        public override object Clone()
+        {
+            var newProduct = (ShipBuildingCompany)this.MemberwiseClone();
+            newProduct.Tags = new List<string>(Tags);
+            return newProduct;
+        }
+
+        public override object ShallowCopy()
+        {
+            return (ShipBuildingCompany)MemberwiseClone();
         }
     }
 }

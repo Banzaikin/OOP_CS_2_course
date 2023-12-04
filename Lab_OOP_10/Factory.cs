@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class Factory : Organization
+    class Factory : Organization, IInit, ICloneable, IComparable
     {
         private int avarageSalary;
         public int AvarageSalary
@@ -36,6 +36,8 @@ namespace Lab_OOP_10
         {
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Средняя зарплата: {AvarageSalary}\n");
+            var tagsRow = string.Join(", ", Tags);
+            Console.WriteLine("Теги: " + tagsRow);
         }
         public override void Init()
         {
@@ -47,6 +49,17 @@ namespace Lab_OOP_10
             base.RandomInit();
             var rnd = new Random();
             AvarageSalary = rnd.Next(15000, 100000);
+        }
+
+        public override object Clone()
+        {
+            var newToy = (Factory)this.MemberwiseClone();
+            newToy.Tags = new List<string>(Tags);
+            return newToy;
+        }
+        public override object ShallowCopy()
+        {
+            return (Factory)MemberwiseClone();
         }
     }
 }

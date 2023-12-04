@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    public class InsuranceCompany : Organization
+    public class InsuranceCompany : Organization, IInit, ICloneable, IComparable
     {
         private int price;
         public int Price
@@ -48,6 +48,18 @@ namespace Lab_OOP_10
             base.RandomInit();
             var rnd = new Random();
             NumEmployess = rnd.Next(1000, 100000);
+        }
+
+        public override object Clone()
+        {
+            var newProduct = (InsuranceCompany)this.MemberwiseClone();
+            newProduct.Tags = new List<string>(Tags);
+            return newProduct;
+        }
+
+        public override object ShallowCopy()
+        {
+            return (InsuranceCompany)MemberwiseClone();
         }
     }
 }
