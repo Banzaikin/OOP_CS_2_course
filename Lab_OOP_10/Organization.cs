@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace Lab_OOP_10
 {
-    class Organization
+    public class Organization
     {
         private string name; 
         private string address;
@@ -37,13 +38,25 @@ namespace Lab_OOP_10
             address = a;
             numEmployess = nE;
         }
-        //Вывод объектов класса
-        public void Show()
+        public virtual string GetString()
         {
-            Console.WriteLine($" Название: {name}\n Адрес: {address}\n Кол-во сотрудников: {numEmployess}");
+            var row = $"Название: {Name}\n"
+                + $"Адрес: {Address}\n"
+                + $"Кол-во сотрудников: {NumEmployess}\n";
+            return row;
+        }
+        //Вывод объектов класса (виртуальный метод)
+        public virtual void Show()
+        {
+            Console.WriteLine(GetString());
+        }
+        //Вывод объектов класса (не виртуальный)
+        public void OrgShow()
+        {
+            Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n Кол-во сотрудников: {NumEmployess}\n");
         }
         //Ввод информации об объектах классов
-        public void Init()
+        public virtual void Init()
         {
             Console.WriteLine("Введите название организации: ");
             Name = Console.ReadLine();
@@ -67,6 +80,10 @@ namespace Lab_OOP_10
                 return Name == other.Name && Address == other.Address && NumEmployess == other.NumEmployess;
             }
             return false;
+        }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Address, NumEmployess);
         }
     }
 }
