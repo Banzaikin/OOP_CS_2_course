@@ -40,6 +40,15 @@ namespace Lab_OOP_10
             numEmployess = nE;
             Tags = CreateTag();
         }
+        public Organization()
+        {
+            var rnd = new Random();
+            Name = "Организация_" + rnd.Next(1, 10);
+            Address = "ул. Пушкина, д. " + rnd.Next(1, 100);
+            NumEmployess = rnd.Next(1, 100);
+
+            Tags = CreateTag();
+        }
         private static List<string> CreateTag()
         {
             var rnd = new Random();

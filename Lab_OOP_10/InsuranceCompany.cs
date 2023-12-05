@@ -24,6 +24,7 @@ namespace Lab_OOP_10
         {
             Price = price;
         }
+        public InsuranceCompany() => RandomInit();
         //переопределение вывода 
         public override string GetString()
         {

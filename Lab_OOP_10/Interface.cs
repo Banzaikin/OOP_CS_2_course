@@ -11,7 +11,7 @@ namespace Lab_OOP_10
         void RandomInit();
     }
 
-    public class SortByPrice : IComparer
+    public class SortByNumEmployess : IComparer
     {
         int IComparer.Compare(object? obj1, object? obj2)
         {

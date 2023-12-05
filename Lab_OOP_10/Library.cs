@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class Library : Organization, IInit, ICloneable, IComparable
+    public class Library : Organization, IInit, ICloneable, IComparable
     {
         private int numBook;
         public int NumBook
@@ -23,6 +23,7 @@ namespace Lab_OOP_10
         {
             NumBook = numBook;
         }
+        public Library() => RandomInit();
         //переопределение вывода 
         public override string GetString()
         {

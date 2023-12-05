@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class Factory : Organization, IInit, ICloneable, IComparable
+    public class Factory : Organization, IInit, ICloneable, IComparable
     {
         private int avarageSalary;
         public int AvarageSalary
@@ -23,6 +23,7 @@ namespace Lab_OOP_10
         {
             AvarageSalary = avarageSalary;
         }
+        public Factory() => RandomInit();
         //переопределение вывода 
         public override string GetString()
         {

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class ShipBuildingCompany : InsuranceCompany, IInit, ICloneable, IComparable
+    public class ShipBuildingCompany : InsuranceCompany, IInit, ICloneable, IComparable
     {
         private int numShip;
         public int NumShip
@@ -23,6 +23,7 @@ namespace Lab_OOP_10
         {
             NumShip = numShip;
         }
+        public ShipBuildingCompany() => RandomInit();
         //переопределение вывода 
         public override string GetString()
         {

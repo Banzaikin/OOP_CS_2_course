@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab_OOP_10
 {
-    class ClassNotHierarchy : IInit
+    public class ClassNotHierarchy : IInit
     {
         public string? Id { get; private set; }
 
