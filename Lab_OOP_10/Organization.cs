@@ -65,8 +65,8 @@ namespace Lab_OOP_10
             var row = $"Название: {Name}\n"
                 + $"Адрес: {Address}\n"
                 + $"Кол-во сотрудников: {NumEmployess}\n";
-            var tagsRow = string.Join(", ", Tags);
-            return row + "\nТеги: " + tagsRow;
+            // var tagsRow = string.Join(", ", Tags);
+            return row;
         }
         //Вывод объектов класса (виртуальный метод)
         public virtual void Show()
@@ -77,8 +77,8 @@ namespace Lab_OOP_10
         public void OrgShow()
         {
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n Кол-во сотрудников: {NumEmployess}\n");
-            var tagsRow = string.Join(", ", Tags);
-            Console.WriteLine("Теги: " + tagsRow);
+            //var tagsRow = string.Join(", ", Tags);
+            //Console.WriteLine("Теги: " + tagsRow);
         }
         //Ввод информации об объектах классов
         public virtual void Init()

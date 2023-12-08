@@ -37,8 +37,8 @@ namespace Lab_OOP_10
         {
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Средняя зарплата: {AvarageSalary}\n");
-            var tagsRow = string.Join(", ", Tags);
-            Console.WriteLine("Теги: " + tagsRow);
+            //var tagsRow = string.Join(", ", Tags);
+            //Console.WriteLine("Теги: " + tagsRow);
         }
         public override void Init()
         {

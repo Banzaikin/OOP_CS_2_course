@@ -11,14 +11,17 @@ namespace Lab_OOP_10
         {
             int number;
             Console.Write(message);
-            if (!int.TryParse(Console.ReadLine(), out number))
+            if (!int.TryParse(Console.ReadLine(), out number) || (number < 0))
             {
                 do
                 {
-                    Console.WriteLine("Ошибка!");
-                    Console.WriteLine("Введите число типа int");
+                    Console.Write("Ошибка! ");
+                    if (number < 0)
+                        Console.WriteLine("Введите положительное число ");
+                    else
+                        Console.WriteLine("Введите число типа int");
                     Console.Write(message);
-                } while (!int.TryParse(Console.ReadLine(), out number));
+                } while (!int.TryParse(Console.ReadLine(), out number) || (number < 0));
             }
             return number;
         }

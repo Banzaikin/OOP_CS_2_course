@@ -38,8 +38,8 @@ namespace Lab_OOP_10
             Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Цена страховки: {Price}\n" +
                 $"Кол-во кораблей: {NumShip}");
-            var tagsRow = string.Join(", ", Tags);
-            Console.WriteLine("Теги: " + tagsRow);
+            //var tagsRow = string.Join(", ", Tags);
+            //Console.WriteLine("Теги: " + tagsRow);
         }
         public override void Init()
         {
