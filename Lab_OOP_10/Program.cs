@@ -149,8 +149,6 @@ namespace Lab_OOP_10
         }
         static void UsingRequest2(Organization[] org)
         {
-            Console.WriteLine("Введите название организации: ");
-            string name = Console.ReadLine();
             Console.WriteLine($"Заводы, в которых рабочих > 50: ");
             Requests.ShowFactory50Employess(org);
         }
