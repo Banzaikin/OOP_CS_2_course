@@ -40,7 +40,7 @@ namespace Lab_OOP_12
             RootNode = null;
         }
         //коллекция, которая инициализируется элементами и емкостью коллекции
-        public BinarySearchTree(IEnumerable<T> collection, int c)
+        public BinarySearchTree(IEnumerable<T> collection)
         {
             RootNode = null;
             foreach (var value in collection)
@@ -66,6 +66,11 @@ namespace Lab_OOP_12
         {
             RootNode = Add(RootNode, data);
             Count++;
+        }
+        public void AddRange(IEnumerable<T> collection)
+        {
+            foreach (var value in collection)
+                Add(value);
         }
         public Node<T> Add(Node<T> currentNode, T data)
         {

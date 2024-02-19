@@ -28,6 +28,37 @@ namespace Lab_OOP_12
             BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(organizations);
             return newTree;
         }
+        static void AddElement(BinarySearchTree<Organization> tree)
+        {
+            int size = Menu.InputInt("Введите кол-во добавляемых элементов: ");
+            for (int i = 0; i < size; i++)
+            {
+                Organization org = new Organization();
+                tree.Add(org);
+            }
+        }
+        static void RemoveElement(BinarySearchTree<Organization> tree)
+        {
+            int size = Menu.InputInt("Введите кол-во удаляемых элементов: ");
+            Organization org = new Organization();
+            for (int i = 0; i < size; i++)
+                tree.Remove(org);
+        }
+        static void FindElement(BinarySearchTree<Organization> tree)
+        {
+            Console.WriteLine("Введите название организации: ");
+            string nameOrg = Console.ReadLine();
+            Console.WriteLine("Введите адрес организации: ");
+            string adressOrg = Console.ReadLine();
+            int numEmplOrg = Menu.InputInt("Введите кол-во сотрудников: ");
+            Organization org = new Organization(nameOrg, adressOrg, numEmplOrg);
+            var findElement = tree.FindNode(org);
+            Console.WriteLine("\tНайденный продукт: ");
+            if (findElement != null)
+                Console.WriteLine(findElement);
+            else
+                Console.WriteLine("Организация не найдена");
+        }
 
         public static void Main()
         {
@@ -41,11 +72,13 @@ namespace Lab_OOP_12
                 "6. Глубокое копирование (Clone)\n",
                 "7. Поверхностное копирование (ShallowCopy)\n",
                 "8. Удаление коллекции из памяти (Clear)\n",
+                "9. Вывод дерева (Print)\n",
                 "0. Выход из программы\n"
                 };
             int command;
             do
             {
+                Console.Clear();
                 //вывод меню
                 for (int i = 0; i < menu.Length; i++)
                 {
@@ -60,7 +93,33 @@ namespace Lab_OOP_12
                     case 2: //Создание дерева (заполнение вручную)
                         tree = CreateTreeConsole();
                         break;
+                    case 3: //Add
+                        AddElement(tree);
+                        break;
+                    case 4: //Remove
+                        RemoveElement(tree);
+                        break;
+                    case 5: //FindNode
+                        FindElement(tree);
+                        break;
+                    case 6: //Clone
+                        tree.Clone();
+                        break;
+                    case 7: //ShallowCopy
+                        tree.ShallowCopy();
+                        break;
+                    case 8: //Clear
+                        tree.Clear();
+                        break;
+                    case 9: //Print
+                        tree.PrintTree();
+                        break;
+                    case 0:
+                        Console.WriteLine("Программа успешно завершила работу");
+                        break;
                 }
+                Console.WriteLine("Нажмите любую клавишу для продолжения...");
+                Console.ReadKey();
             } while (command != 0) ;
         }
     }
