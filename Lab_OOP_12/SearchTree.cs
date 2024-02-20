@@ -43,8 +43,7 @@ namespace Lab_OOP_12
         public BinarySearchTree(IEnumerable<T> collection)
         {
             RootNode = null;
-            foreach (var value in collection)
-                Add(value);
+            AddRange(collection);
         }
         public BinarySearchTree(IComparer<T>? comparer)
         {

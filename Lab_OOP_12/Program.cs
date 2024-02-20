@@ -13,7 +13,8 @@ namespace Lab_OOP_12
             Organization[] organizations = new Organization[size];
             for (int i = 0; i < size; i++)
                 organizations[i] = new Organization();
-            BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(organizations);
+            BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(new CustomComparer());
+            newTree.AddRange(organizations);
             return newTree;
         }
         static BinarySearchTree<Organization> CreateTreeConsole()
@@ -25,24 +26,27 @@ namespace Lab_OOP_12
                 organizations[i] = new Organization();
                 organizations[i].NumEmployess = Menu.InputInt("Введите кол-во сотрудников " + (i + 1) + " организации: ");
             }
-            BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(organizations);
+            BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(new CustomComparer());
+            newTree.AddRange(organizations);
             return newTree;
         }
         static void AddElement(BinarySearchTree<Organization> tree)
         {
             int size = Menu.InputInt("Введите кол-во добавляемых элементов: ");
+            Organization[] organizations = new Organization[size];
             for (int i = 0; i < size; i++)
-            {
-                Organization org = new Organization();
-                tree.Add(org);
-            }
+                organizations[i] = new Organization();
+            tree.AddRange(organizations);
         }
         static void RemoveElement(BinarySearchTree<Organization> tree)
         {
             int size = Menu.InputInt("Введите кол-во удаляемых элементов: ");
-            Organization org = new Organization();
+            Organization[] org = new Organization[size];
             for (int i = 0; i < size; i++)
-                tree.Remove(org);
+            {
+                org[i].NumEmployess = Menu.InputInt("Введите кол-во сотрудников " + (i + 1) + " организации: ");
+                tree.Remove(org[i]);
+            }
         }
         static void FindElement(BinarySearchTree<Organization> tree)
         {
@@ -103,10 +107,12 @@ namespace Lab_OOP_12
                         FindElement(tree);
                         break;
                     case 6: //Clone
-                        tree.Clone();
+                        var cloneTree = (BinarySearchTree<Organization>)tree.Clone();
+                        cloneTree.PrintTree();
                         break;
                     case 7: //ShallowCopy
-                        tree.ShallowCopy();
+                        var shallowCopyTree = (BinarySearchTree<Organization>)tree.ShallowCopy();
+                        shallowCopyTree.PrintTree();
                         break;
                     case 8: //Clear
                         tree.Clear();
