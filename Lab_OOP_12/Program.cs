@@ -24,6 +24,12 @@ namespace Lab_OOP_12
             for (int i = 0; i < size; i++)
             {
                 organizations[i] = new Organization();
+                Console.WriteLine("Введите номер организации: ");
+                Console.Write("Организация_");
+                organizations[i].Name = ("Организация_") + Console.ReadLine();
+                Console.WriteLine("Введите номер дома: ");
+                Console.Write("ул. Пушкина, д. ");
+                organizations[i].Address = ("ул. Пушкина, д. ") + (string)Console.ReadLine();
                 organizations[i].NumEmployess = Menu.InputInt("Введите кол-во сотрудников " + (i + 1) + " организации: ");
             }
             BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(new CustomComparer());
@@ -40,24 +46,21 @@ namespace Lab_OOP_12
         }
         static void RemoveElement(BinarySearchTree<Organization> tree)
         {
-            int size = Menu.InputInt("Введите кол-во удаляемых элементов: ");
-            Organization[] org = new Organization[size];
-            for (int i = 0; i < size; i++)
-            {
-                org[i].NumEmployess = Menu.InputInt("Введите кол-во сотрудников " + (i + 1) + " организации: ");
-                tree.Remove(org[i]);
-            }
+            foreach (var item in CreateTreeConsole())
+                tree.Remove(item);
         }
         static void FindElement(BinarySearchTree<Organization> tree)
         {
             Console.WriteLine("Введите название организации: ");
-            string nameOrg = Console.ReadLine();
+            Console.Write("Организация_");
+            string nameOrg = ("Организация_") + Console.ReadLine();
             Console.WriteLine("Введите адрес организации: ");
-            string adressOrg = Console.ReadLine();
+            Console.Write("ул. Пушкина, д. ");
+            string adressOrg = ("ул. Пушкина, д. ") + Console.ReadLine();
             int numEmplOrg = Menu.InputInt("Введите кол-во сотрудников: ");
             Organization org = new Organization(nameOrg, adressOrg, numEmplOrg);
-            var findElement = tree.FindNode(org);
-            Console.WriteLine("\tНайденный продукт: ");
+            var findElement = tree.Find(org);
+            Console.WriteLine("\tНайденная организация: ");
             if (findElement != null)
                 Console.WriteLine(findElement);
             else
@@ -126,7 +129,7 @@ namespace Lab_OOP_12
                 }
                 Console.WriteLine("Нажмите любую клавишу для продолжения...");
                 Console.ReadKey();
-            } while (command != 0) ;
+            } while (command != 0);
         }
     }
     public class CustomComparer : IComparer<Organization>

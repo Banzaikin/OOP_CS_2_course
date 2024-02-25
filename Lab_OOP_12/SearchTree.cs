@@ -132,8 +132,14 @@ namespace Lab_OOP_12
             }
             return minValue;
         }
-
-        public Node<T> FindNode(T data, Node<T> startWithNode = null)
+        public T Find(T item)
+        {
+            var itemNode = FindNode(item, RootNode);
+            if (itemNode != null)
+                return itemNode.Data;
+            return default;
+        }
+        private Node<T> FindNode(T data, Node<T> startWithNode = null)
         {
             if (startWithNode == null)
                 return null;
@@ -187,6 +193,22 @@ namespace Lab_OOP_12
                 PrintTree(startNode.Left, indent, Side.LeftSide);
                 PrintTree(startNode.Right, indent, Side.RightSide);
             }
+        }
+        public T GetNameAddress()
+        {
+            GetNameAddress(RootNode);
+            return RootNode.Data;
+        }
+        public T GetNameAddress(Node<T> startNode)
+        {
+            if (startNode != null)
+            {
+                //рекурсивный вызов для левой и правой веток
+                GetNameAddress(startNode.Left);
+                GetNameAddress(startNode.Right);
+                return startNode.Data;
+            }
+            return default(T);
         }
         IEnumerator IEnumerable.GetEnumerator()
         {
