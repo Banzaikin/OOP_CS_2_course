@@ -122,7 +122,7 @@ namespace Lab_OOP_12
             return node;
         }
 
-        private T MinValue(Node<T> node)
+        public T MinValue(Node<T> node)
         {
             T minValue = node.Data;
             while (node.Left != null)
