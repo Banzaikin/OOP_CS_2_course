@@ -122,6 +122,37 @@ namespace Lab_OOP_12.Tests
             Assert.AreEqual(default(Organization), foundItem);
         }
 
-        // Add more tests for other methods in the BinarySearchTree class
+        [TestMethod]
+        public void Clear_RootNodeIsNull()
+        {
+            var tree = new BinarySearchTree<Organization>(new CustomComparer());
+            tree.Clear();
+            Assert.IsNull(tree.RootNode);
+        }
+
+        [TestMethod]
+        public void Clear_CountIsZero()
+        {
+            var tree = new BinarySearchTree<Organization>(new CustomComparer());
+            tree.Clear();
+            Assert.AreEqual(0, tree.Count);
+        }
+
+        [TestMethod]
+        public void Clone_ReturnsNewInstance()
+        {
+            var tree = new BinarySearchTree<Organization>(new CustomComparer());
+            var clonedTree = tree.Clone();
+            Assert.AreNotSame(tree, clonedTree);
+        }
+
+        [TestMethod]
+        public void ShallowCopy_ReturnsNewInstance()
+        {
+            var tree = new BinarySearchTree<Organization>(new CustomComparer());
+            var shallowCopy = tree.ShallowCopy();
+            Assert.AreNotSame(tree, shallowCopy);
+        }
+        
     }
 }

@@ -66,6 +66,34 @@ namespace Lab_OOP_12
             else
                 Console.WriteLine("Организация не найдена");
         }
+        static void TaskClone(BinarySearchTree<Organization> tree)
+        {
+            tree.Add(new Organization("1", "1", 1));
+            var cloneTree = (BinarySearchTree<Organization>)tree.Clone();
+            Console.WriteLine("Изначальное дерево: ");
+            tree.PrintTree();
+            Console.WriteLine("Клонированное дерево: ");
+            cloneTree.PrintTree();
+            tree.Remove(new Organization("1", "1", 1));
+            Console.WriteLine("Дерево после удаления: ");
+            tree.PrintTree();
+            Console.WriteLine("Клонированное дерево после удаления: ");
+            cloneTree.PrintTree();
+        }
+        static void TaskShallowCopy(BinarySearchTree<Organization> tree)
+        {
+            tree.Add(new Organization("1", "1", 1));
+            var shallowCopyTree = (BinarySearchTree<Organization>)tree.ShallowCopy();
+            Console.WriteLine("Изначальное дерево: ");
+            tree.PrintTree();
+            Console.WriteLine("Копированное дерево: ");
+            shallowCopyTree.PrintTree();
+            tree.Remove(new Organization("1", "1", 1));
+            Console.WriteLine("Дерево после удаления: ");
+            tree.PrintTree();
+            Console.WriteLine("Копированное дерево после удаления: ");
+            shallowCopyTree.PrintTree();
+        }
 
         public static void Main()
         {
@@ -110,12 +138,10 @@ namespace Lab_OOP_12
                         FindElement(tree);
                         break;
                     case 6: //Clone
-                        var cloneTree = (BinarySearchTree<Organization>)tree.Clone();
-                        cloneTree.PrintTree();
+                        TaskClone(tree);
                         break;
                     case 7: //ShallowCopy
-                        var shallowCopyTree = (BinarySearchTree<Organization>)tree.ShallowCopy();
-                        shallowCopyTree.PrintTree();
+                        TaskShallowCopy(tree);
                         break;
                     case 8: //Clear
                         tree.Clear();

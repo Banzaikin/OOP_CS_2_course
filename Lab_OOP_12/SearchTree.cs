@@ -61,12 +61,12 @@ namespace Lab_OOP_12
         public bool IsReadOnly => false;
 
         public IComparer<T> Comparer { get; private set; }
-        public void Add(T data)
+        public virtual void Add(T data)
         {
             RootNode = Add(RootNode, data);
             Count++;
         }
-        public void AddRange(IEnumerable<T> collection)
+        public virtual void AddRange(IEnumerable<T> collection)
         {
             foreach (var value in collection)
                 Add(value);
@@ -87,7 +87,7 @@ namespace Lab_OOP_12
             return currentNode;
         }
 
-        public bool Remove(T value)
+        public virtual bool Remove(T value)
         {
             Node<T> OrigRoot = RootNode;
             RootNode = RemoveRec(RootNode, value);
@@ -139,7 +139,7 @@ namespace Lab_OOP_12
                 return itemNode.Data;
             return default;
         }
-        private Node<T> FindNode(T data, Node<T> startWithNode = null)
+        public Node<T> FindNode(T data, Node<T> startWithNode = null)
         {
             if (startWithNode == null)
                 return null;
