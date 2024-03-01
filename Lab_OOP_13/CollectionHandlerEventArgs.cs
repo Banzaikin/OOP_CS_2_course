@@ -9,7 +9,7 @@ namespace Lab_OOP_13
     {
         public string NameCollection { get; set; }
         public string TypeChanged {get; set; }
-        public Organization LinkObj { get; set; }
+        public Organization LinkObj { get; }
         public CollectionHandlerEventArgs(string NameCollection, string TypeChanged, Organization? LinkObj)
         {
             this.NameCollection = NameCollection;
