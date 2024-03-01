@@ -30,10 +30,6 @@ namespace Lab_OOP_12
     {
         public Node<T> RootNode { get; set; }
         //пустая коллекция 
-        public BinarySearchTree()
-        {
-            RootNode = null;
-        }
         //пустая коллекция с емкостью capacity (для дерева емкость не имеет особого значения, т.к. зависит от специфики добавления)
         public BinarySearchTree(int capacity)
         {
@@ -48,6 +44,10 @@ namespace Lab_OOP_12
         public BinarySearchTree(IComparer<T>? comparer)
         {
             this.Comparer = comparer ?? Comparer<T>.Default;
+        }
+        public BinarySearchTree() : this(Comparer<T>.Default)
+        {
+            RootNode = null;
         }
         public BinarySearchTree(BinarySearchTree<T> tree) : this(tree.Comparer)
         {

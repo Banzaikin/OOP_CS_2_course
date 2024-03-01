@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Lab_10;
 
 namespace Lab_OOP_13
@@ -19,13 +20,14 @@ namespace Lab_OOP_13
             tree1.CollectionReferenceChanged += new CollectionHandler(journal2.CollectionReferenceChanged);
             tree2.CollectionReferenceChanged += new CollectionHandler(journal2.CollectionReferenceChanged);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
+            {
                 tree1.Add(new Organization());
-            tree1.Add(new Organization("1", "1", 1));
-            for (int i = 0; i < 5; i++)
                 tree2.Add(new Organization());
-            tree2.Add(new Organization("1", "1", 1));            
-            
+            }
+            tree1.Add(new Organization("1", "1", 1));
+            tree2.Add(new Organization("1", "1", 1));
+
             tree1.Remove(new Organization("1", "1", 1));
             tree2.Remove(new Organization("1", "1", 1));
 

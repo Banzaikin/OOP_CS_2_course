@@ -126,7 +126,7 @@ namespace Lab_10
             return (Organization)this.MemberwiseClone();
         }
 
-        public int CompareTo(object? obj)
+        public virtual int CompareTo(object? obj)
         {
             if (obj is null) return 1;
             else

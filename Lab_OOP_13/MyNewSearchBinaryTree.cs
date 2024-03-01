@@ -46,6 +46,11 @@ namespace Lab_OOP_13
             OnCollectionCountChanged(this, new CollectionHandlerEventArgs(this.Name, "add", p));
             base.Add(p);
         }
+        public override void AddRange(IEnumerable<Organization> collection)
+        {
+            foreach (var value in collection)
+                Add(value);
+        }
         public Organization this[int index]
         {
             get
@@ -71,6 +76,20 @@ namespace Lab_OOP_13
                 inElem.Data.Name = value.Name;
             }
         }
+        public class CustomComparer : IComparer<Organization>
+        {
+            public int Compare(Organization? organization1, Organization? organization2)
+            {
+                if (organization1 == null || organization2 == null)
+                    return 0;
 
+                if (organization1.NumEmployess > organization2.NumEmployess)
+                    return 1;
+                else if (organization1.NumEmployess < organization2.NumEmployess)
+                    return -1;
+                else
+                    return 0;
+            }
+        }
     }
 }
