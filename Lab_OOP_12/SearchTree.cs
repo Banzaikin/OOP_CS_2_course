@@ -75,15 +75,21 @@ namespace Lab_OOP_12
         {
             if (currentNode == null)
                 return new Node<T>(data);
+            try 
+            {
+                int result = Comparer.Compare(currentNode.Data, data);
 
-            int result = Comparer.Compare(currentNode.Data, data);
-
-            if (result == 0)
-                throw new InvalidOperationException("Бинарное дерево не содержит дубликатов данных.");
-            else if (result > 0)
-                currentNode.Left = Add(currentNode.Left, data);
-            else if (result < 0)
-                currentNode.Right = Add(currentNode.Right, data);
+                if (result == 0)
+                    throw new Exception("Бинарное дерево не содержит дубликатов данных.");
+                else if (result < 0)
+                    currentNode.Left = Add(currentNode.Left, data);
+                else if (result > 0)
+                    currentNode.Right = Add(currentNode.Right, data);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Ошибка: {e.Message}. Элемент не был добавлен в дерево!");
+            }
             return currentNode;
         }
 
@@ -98,7 +104,7 @@ namespace Lab_OOP_12
         {
             if (node == null) return node;
 
-            int comparison = Comparer<T>.Default.Compare(value, node.Data);
+            int comparison = Comparer.Compare(node.Data, value);
             if (comparison < 0)
             {
                 node.Left = RemoveRec(node.Left, value);
@@ -110,9 +116,16 @@ namespace Lab_OOP_12
             else
             {
                 // Узел с одним потомком или без потомков
-                if (node.Left == null) return node.Right;
-                else if (node.Right == null) return node.Left;
-
+                if (node.Left == null)
+                {
+                    Count--;
+                    return node.Right;
+                }
+                else if (node.Right == null)
+                {
+                    Count--;
+                    return node.Left;
+                }
                 // Узел с двумя потомками: получение наименьшего значения в правом поддереве
                 node.Data = MinValue(node.Right);
 
@@ -186,7 +199,7 @@ namespace Lab_OOP_12
         {
             if (startNode != null)
             {
-                var nodeSide = side == null ? "+" : side == Side.LeftSide ? "L" : "R";
+                var nodeSide = side == null ? "+" : side == Side.LeftSide ? "R" : "L";
                 Console.WriteLine($"{indent} [{nodeSide}]- {startNode.Data}");
                 indent += new string(' ', 3);
                 //рекурсивный вызов для левой и правой веток

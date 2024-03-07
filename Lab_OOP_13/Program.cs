@@ -20,18 +20,18 @@ namespace Lab_OOP_13
             tree1.CollectionReferenceChanged += new CollectionHandler(journal2.CollectionReferenceChanged);
             tree2.CollectionReferenceChanged += new CollectionHandler(journal2.CollectionReferenceChanged);
 
+            var organizations = new Organization[3];
             for (int i = 0; i < 3; i++)
-            {
-                tree1.Add(new Organization());
-                tree2.Add(new Organization());
-            }
-            tree1.Add(new Organization("1", "1", 1));
-            tree2.Add(new Organization("1", "1", 1));
+                organizations[i] = new Organization();
+            tree1.AddRange(organizations);
+            tree2.AddRange(organizations);
 
-            tree1.Remove(new Organization("1", "1", 1));
-            tree2.Remove(new Organization("1", "1", 1));
+            tree1.Remove(2);
+            tree1.Remove(0);
+            tree2.Remove(2);
+            tree2.Remove(0);
 
-            var organization = new Organization("0", "0", 10);
+            var organization = new Organization("1", "1", 1);
             tree1[0] = organization;
             tree2[0] = organization;
 

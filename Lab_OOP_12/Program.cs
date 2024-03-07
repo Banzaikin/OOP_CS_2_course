@@ -25,11 +25,9 @@ namespace Lab_OOP_12
             {
                 organizations[i] = new Organization();
                 Console.WriteLine("Введите номер организации: ");
-                Console.Write("Организация_");
-                organizations[i].Name = ("Организация_") + Console.ReadLine();
+                organizations[i].Name = ("Организация_") + Menu.InputInt("Организация_"); 
                 Console.WriteLine("Введите номер дома: ");
-                Console.Write("ул. Пушкина, д. ");
-                organizations[i].Address = ("ул. Пушкина, д. ") + (string)Console.ReadLine();
+                organizations[i].Address = ("ул. Пушкина, д. ") + Menu.InputInt("ул. Пушкина, д. ");
                 organizations[i].NumEmployess = Menu.InputInt("Введите кол-во сотрудников " + (i + 1) + " организации: ");
             }
             BinarySearchTree<Organization> newTree = new BinarySearchTree<Organization>(new CustomComparer());
@@ -52,11 +50,9 @@ namespace Lab_OOP_12
         static void FindElement(BinarySearchTree<Organization> tree)
         {
             Console.WriteLine("Введите название организации: ");
-            Console.Write("Организация_");
-            string nameOrg = ("Организация_") + Console.ReadLine();
+            string nameOrg = ("Организация_") + Menu.InputInt("Организация_");
             Console.WriteLine("Введите адрес организации: ");
-            Console.Write("ул. Пушкина, д. ");
-            string adressOrg = ("ул. Пушкина, д. ") + Console.ReadLine();
+            string adressOrg = ("ул. Пушкина, д. ") + Menu.InputInt("ул. Пушкина, д. ");
             int numEmplOrg = Menu.InputInt("Введите кол-во сотрудников: ");
             Organization org = new Organization(nameOrg, adressOrg, numEmplOrg);
             var findElement = tree.Find(org);
@@ -103,9 +99,9 @@ namespace Lab_OOP_12
                 "2. Создание дерева (заполнение вручную)\n\n",
                 "3. Добавление элемента (Add)\n",
                 "4. Удаление узла (Remove)\n",
-                "5. Поиск элемента по значению (FindNode)\n",
+                "5. Поиск элемента по значению (FindNode)\n\n",
                 "6. Глубокое копирование (Clone)\n",
-                "7. Поверхностное копирование (ShallowCopy)\n",
+                "7. Поверхностное копирование (ShallowCopy)\n\n",
                 "8. Удаление коллекции из памяти (Clear)\n",
                 "9. Вывод дерева (Print)\n",
                 "0. Выход из программы\n"
@@ -132,9 +128,11 @@ namespace Lab_OOP_12
                         AddElement(tree);
                         break;
                     case 4: //Remove
+                        tree.PrintTree();
                         RemoveElement(tree);
                         break;
                     case 5: //FindNode
+                        tree.PrintTree();
                         FindElement(tree);
                         break;
                     case 6: //Clone
