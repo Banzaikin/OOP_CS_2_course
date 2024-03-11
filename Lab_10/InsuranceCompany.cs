@@ -28,7 +28,7 @@ namespace Lab_10
         //переопределение вывода 
         public override string GetString()
         {
-            return base.GetString() + $"Цена страховки: {Price}\n";
+            return base.GetString() + $"Цена страховки: {Price}\n(Страховая компания)\n";
         }
         public override void Show()
         {
@@ -36,7 +36,7 @@ namespace Lab_10
         }
         public new void OrgShow()
         {
-            Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
+            Console.WriteLine($" Название: {Name} (Страховая компания)\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Цена страховки: {Price}\n");
         }
         public override void Init()
@@ -48,7 +48,7 @@ namespace Lab_10
         {
             base.RandomInit();
             var rnd = new Random();
-            NumEmployess = rnd.Next(1000, 100000);
+            Price = rnd.Next(1000, 100000);
         }
 
         public override object Clone()

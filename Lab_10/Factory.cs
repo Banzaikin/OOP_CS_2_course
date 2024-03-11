@@ -27,7 +27,7 @@ namespace Lab_10
         //переопределение вывода 
         public override string GetString()
         {
-            return base.GetString() + $"Средняя зарплата: {AvarageSalary}\n";
+            return base.GetString() + $"Средняя зарплата: {AvarageSalary}\n(Завод)\n";
         }
         public override void Show()
         {
@@ -35,7 +35,7 @@ namespace Lab_10
         }
         public new void OrgShow()
         {
-            Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
+            Console.WriteLine($" Название: {Name} (Завод)\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Средняя зарплата: {AvarageSalary}\n");
             //var tagsRow = string.Join(", ", Tags);
             //Console.WriteLine("Теги: " + tagsRow);

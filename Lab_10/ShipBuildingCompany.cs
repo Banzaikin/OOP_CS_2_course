@@ -27,7 +27,7 @@ namespace Lab_10
         //переопределение вывода 
         public override string GetString()
         {
-            return base.GetString() + $"Кол-во кораблей: {NumShip}\n";
+            return base.GetString() + $"Кол-во кораблей: {NumShip}\n(Судостроительная компания)\n";
         }
         public override void Show()
         {
@@ -35,7 +35,7 @@ namespace Lab_10
         }
         public new void OrgShow()
         {
-            Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
+            Console.WriteLine($" Название: {Name} (Судостроительная компания)\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Цена страховки: {Price}\n" +
                 $"Кол-во кораблей: {NumShip}");
             //var tagsRow = string.Join(", ", Tags);

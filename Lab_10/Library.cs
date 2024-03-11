@@ -33,7 +33,7 @@ namespace Lab_10
         //переопределение вывода 
         public override string GetString()
         {
-            return base.GetString() + $"Кол-во книг: {NumBook}\n";
+            return base.GetString() + $"Кол-во книг: {NumBook}\n(Библиотека)\n";
         }
         public override void Show()
         {
@@ -41,7 +41,7 @@ namespace Lab_10
         }
         public new void OrgShow()
         {
-            Console.WriteLine($" Название: {Name}\n Адрес: {Address}\n " +
+            Console.WriteLine($" Название: {Name} (Библиотека)\n Адрес: {Address}\n " +
                 $"Кол-во сотрудников: {NumEmployess}\n Кол-во книг: {NumBook}\n");
             //var tagsRow = string.Join(", ", Tags);
             //Console.WriteLine("Теги: " + tagsRow);
