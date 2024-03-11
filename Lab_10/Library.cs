@@ -57,7 +57,7 @@ namespace Lab_10
         {
             base.RandomInit();
             var rnd = new Random();
-            NumEmployess = rnd.Next(100, 10000);
+            numBook = rnd.Next(100, 10000);
         }
 
         public override object Clone()
