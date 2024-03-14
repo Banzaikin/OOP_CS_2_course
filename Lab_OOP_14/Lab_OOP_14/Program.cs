@@ -1,10 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Lab_10;
 using System.Linq;
+using Lab_OOP_12;
 
 namespace Lab_OOP_14
 {
@@ -44,6 +44,36 @@ namespace Lab_OOP_14
                 cities.Add(i, districts);
             }
             return cities;
+        }
+        //создание дерева
+        static BinarySearchTree<Organization> CreateTreeRandom()
+        {
+            int size = Menu.InputInt("Введите размер дерева: ");
+            var tree = new BinarySearchTree<Organization>();
+            for (int i = 1; i <= size; i++)
+            {
+                var rnd = new Random();
+                int item = rnd.Next(1, 5);
+                switch (item)
+                {
+                    case 1:
+                        tree.Add(new Library());
+                        break;
+                    case 2:
+                        tree.Add(new InsuranceCompany());
+                        break;
+                    case 3:
+                        tree.Add(new ShipBuildingCompany());
+                        break;
+                    case 4:
+                        tree.Add(new Factory());
+                        break;
+                    case 5:
+                        tree.Add(new Organization());
+                        break;
+                }
+            }
+            return tree;
         }
         //------------------------------
         //--------- 1 часть ------------
@@ -130,6 +160,34 @@ namespace Lab_OOP_14
             foreach (var item in subsetMethod)
                 Console.WriteLine("С помощью LINQ: " + item.Name + " - " + item.Count);
         }
+        //------------------------------
+        //--------- 2 часть ------------
+        //------------------------------
+        //На выборку данных по условию.
+        static void TreeMethod1(BinarySearchTree<Organization> cities)
+        {
+            Console.WriteLine("Название всех заводов");
+            var subset = cities.SelectOrg(org => org is Factory);
+            foreach (Organization s in subset)
+                Console.WriteLine(s);
+        }
+        //Агрегирование данных (среднее, максимум/минимум, сумма и пр.).
+        static void TreeMethod2(BinarySearchTree<Organization> cities)
+        {
+            Console.WriteLine("Кол-во всех сотрудников в библиотеках");
+            var subset = cities.CountOrg(org => org is Library value && org.NumEmployess > 0);
+            Console.WriteLine(subset);
+        }
+        //Сортировка коллекции (по убыванию/по возрастанию).
+        static void TreeMethod3(BinarySearchTree<Organization> cities)
+        {
+            Console.WriteLine("Сортировка по кол-ву сотрудников");
+            BinarySearchTree<Organization>  newTree = cities.SortOrg(org => org.NumEmployess);
+            foreach (Organization s in newTree)
+                Console.WriteLine(s);
+            newTree.PrintTree();
+        }
+
         static void Main(string[] args)
         {
             int sizeSortedDictionary = Menu.InputInt("Введите кол-во городов: ");
@@ -154,6 +212,12 @@ namespace Lab_OOP_14
             Queue3(cities);
             Queue4(cities);
             Queue5(cities);
+
+            BinarySearchTree<Organization> tree = new BinarySearchTree<Organization>();
+            tree = CreateTreeRandom();
+            TreeMethod1(tree);
+            TreeMethod2(tree);
+            TreeMethod3(tree);
         }
     }
 }
