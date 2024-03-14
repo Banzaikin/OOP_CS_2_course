@@ -158,43 +158,50 @@ namespace Lab_OOP_14
                 .GroupBy(org => org.Name)
                 .Select(n => new { Name = n.Key, Count = n.Count() }).ToList();
             foreach (var item in subsetMethod)
-                Console.WriteLine("С помощью LINQ: " + item.Name + " - " + item.Count);
+                Console.WriteLine("С помощью методов расширения: " + item.Name + " - " + item.Count);
         }
         //------------------------------
         //--------- 2 часть ------------
         //------------------------------
         //На выборку данных по условию.
-        static void TreeMethod1(BinarySearchTree<Organization> cities)
+        static void TreeMethod1(BinarySearchTree<Organization> tree)
         {
             Console.WriteLine("Название всех заводов");
-            var subset = cities.SelectOrg(org => org is Factory);
+            var subset = tree.SelectOrg(org => org is Factory);
             foreach (Organization s in subset)
                 Console.WriteLine(s);
         }
         //Агрегирование данных (среднее, максимум/минимум, сумма и пр.).
-        static void TreeMethod2(BinarySearchTree<Organization> cities)
+        static void TreeMethod2(BinarySearchTree<Organization> tree)
         {
             Console.WriteLine("Кол-во всех сотрудников в библиотеках");
-            var subset = cities.CountOrg(org => org is Library value && org.NumEmployess > 0);
+            var subset = tree.CountOrg(org => org is Library value && org.NumEmployess > 0);
             Console.WriteLine(subset);
         }
         //Сортировка коллекции (по убыванию/по возрастанию).
-        static void TreeMethod3(BinarySearchTree<Organization> cities)
+        static void TreeMethod3(BinarySearchTree<Organization> tree)
         {
             Console.WriteLine("Сортировка по кол-ву сотрудников");
-            BinarySearchTree<Organization>  newTree = cities.SortOrg(org => org.NumEmployess);
+            BinarySearchTree<Organization>  newTree = tree.SortOrg(org => org.NumEmployess);
             foreach (Organization s in newTree)
                 Console.WriteLine(s);
             newTree.PrintTree();
+        }
+        //Группировка данных
+        static void TreeMethod4(BinarySearchTree<Organization> tree)
+        {
+            Console.WriteLine("Группировка по названию");
+            var subset = tree.GroupOrg(org => org.Name).Select(n => new { Name = n.Key, Count = n.Count() }).ToList();
+
+            foreach (var item in subset)
+                Console.WriteLine("С помощью методов расширения: " + item.Name + " - " + item.Count);
         }
 
         static void Main(string[] args)
         {
             int sizeSortedDictionary = Menu.InputInt("Введите кол-во городов: ");
             int sizeQueue = Menu.InputInt("Введите кол-во организаций: ");
-            var district = new Queue();
-            var cities = new SortedDictionary<int, Queue<Organization>>();
-            cities = CreateOrganizationRandom(sizeSortedDictionary, sizeQueue);
+            SortedDictionary<int, Queue<Organization>> cities = CreateOrganizationRandom(sizeSortedDictionary, sizeQueue);
             Console.WriteLine("\tЭлементы словаря: ");
             foreach (var key in cities.Keys)
             {
@@ -213,11 +220,11 @@ namespace Lab_OOP_14
             Queue4(cities);
             Queue5(cities);
 
-            BinarySearchTree<Organization> tree = new BinarySearchTree<Organization>();
-            tree = CreateTreeRandom();
+            BinarySearchTree<Organization> tree = CreateTreeRandom();
             TreeMethod1(tree);
             TreeMethod2(tree);
             TreeMethod3(tree);
+            TreeMethod4(tree);
         }
     }
 }

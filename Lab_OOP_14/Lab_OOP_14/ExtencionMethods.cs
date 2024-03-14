@@ -35,6 +35,11 @@ namespace Lab_OOP_14
             }
             return newTree;
         }
-
+        //Группировка данных 
+        public static IEnumerable<IGrouping<string, Organization>> GroupOrg(this BinarySearchTree<Organization> collection, Func<Organization, string> predicate)
+        {
+            var subset = collection.GroupBy(predicate);
+            return subset;
+        }
     }
 }
