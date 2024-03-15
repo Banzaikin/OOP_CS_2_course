@@ -8,10 +8,10 @@ using Lab_OOP_12;
 
 namespace Lab_OOP_14
 {
-    static class Program
+    public static class Program
     {
         //создание словаря
-        static SortedDictionary<int, Queue<Organization>> CreateOrganizationRandom(int sizeSortedDictionary, int sizeQueue)
+        public static SortedDictionary<int, Queue<Organization>> CreateOrganizationRandom(int sizeSortedDictionary, int sizeQueue)
         {
             
             var cities = new SortedDictionary<int, Queue<Organization>>();
@@ -36,9 +36,6 @@ namespace Lab_OOP_14
                         case 4:
                             districts.Enqueue(new Factory());
                             break;
-                        case 5:
-                            districts.Enqueue(new Organization());
-                            break;
                     }
                 }
                 cities.Add(i, districts);
@@ -46,9 +43,8 @@ namespace Lab_OOP_14
             return cities;
         }
         //создание дерева
-        static BinarySearchTree<Organization> CreateTreeRandom()
+        public static BinarySearchTree<Organization> CreateTreeRandom(int size)
         {
-            int size = Menu.InputInt("Введите размер дерева: ");
             var tree = new BinarySearchTree<Organization>();
             for (int i = 1; i <= size; i++)
             {
@@ -68,9 +64,6 @@ namespace Lab_OOP_14
                     case 4:
                         tree.Add(new Factory());
                         break;
-                    case 5:
-                        tree.Add(new Organization());
-                        break;
                 }
             }
             return tree;
@@ -79,39 +72,43 @@ namespace Lab_OOP_14
         //--------- 1 часть ------------
         //------------------------------
         //выборка данных
-        static void Queue1(SortedDictionary<int, Queue<Organization>> cities)
+        public static void LinqQueue1(SortedDictionary<int, Queue<Organization>> cities)
         {
-            Console.WriteLine("Вывести все организации, в которых сотрудников > 50");
-            Console.WriteLine("С помощью LINQ: ");
-            var subset = from key in cities.Keys from Organization org in cities[key] where org is Organization value 
-                         && (org.NumEmployess > 50) select org;
+            Console.WriteLine("\n------------Вывод организаций, в которых сотрудников > 50 (С помощью LINQ): \n");
+            var subset = from key in cities.Keys
+                         from Organization org in cities[key]
+                         where org is Organization value
+                         && (org.NumEmployess > 50)
+                         select org;
             foreach (Organization s in subset)
                 Console.WriteLine(s);
-            Console.WriteLine("С помощью методов расширения: ");
+        }
+        public static void ExtensionQueue1(SortedDictionary<int, Queue<Organization>> cities)
+        {
+            Console.WriteLine("\n-----------Вывод организаций, в которых сотрудников > 50 (С помощью методов расширения): \n");
             var subsetMethod = cities.Values.SelectMany(org => org.Where(org => org is Organization value &&
                 (org.NumEmployess > 50)).Select(org => org));
             foreach (Organization s in subsetMethod)
                 Console.WriteLine(s);
         }
         //Получение счетчика (количества объектов с заданным параметром).
-        static void Queue2(SortedDictionary<int, Queue<Organization>> cities)
+        static void LinqQueue2(SortedDictionary<int, Queue<Organization>> cities)
         {
-            Console.WriteLine("Кол-во библиотек в городе");
-            Console.WriteLine("С помощью LINQ: ");
             int subset = (from key in cities.Keys
                          from Organization org in cities[key]
                          where org is Library value
                          select org).Count();
-            Console.WriteLine("Кол-во библиотек в городе: " + subset);
-            Console.WriteLine("С помощью методов расширения: ");
+            Console.Write("\n-----------Кол-во библиотек в городе (С помощью LINQ): " + subset);
+        }
+        static void ExtensionQueue2(SortedDictionary<int, Queue<Organization>> cities)
+        {
             int subsetMethod = cities.Values.SelectMany(org => org.Where(org => org is Library value)).Count();
-            Console.WriteLine("Кол-во библиотек в городе: " + subsetMethod);
+            Console.Write("\n-----------Кол-во библиотек в городе (С помощью методов расширения): " + subsetMethod);
         }
         //Использование операций над множествами (пересечение, объединение, разность)
-        static void Queue3(SortedDictionary<int, Queue<Organization>> cities)
+        static void LinqQueue3(SortedDictionary<int, Queue<Organization>> cities)
         {
-            Console.WriteLine("Объединение заводы + организации 80+ сотрудников");
-            Console.WriteLine("С помощью LINQ: ");
+            Console.WriteLine("\n-----------Объединение заводы + организации 80+ сотрудников (С помощью Linq): \n");
             var subset = (from key in cities.Keys
                          from Organization org in cities[key]
                          where org.NumEmployess >= 80
@@ -122,7 +119,10 @@ namespace Lab_OOP_14
                           select company);
             foreach (Organization s in subset)
                 Console.WriteLine(s);
-            Console.WriteLine("С помощью методов расширения: ");
+        }
+        static void ExtensionQueue3(SortedDictionary<int, Queue<Organization>> cities)
+        {
+            Console.WriteLine("\n---------Объединение заводы + организации 80+ сотрудников (С помощью методов расширения): \n");
             var subsetCompany = cities.Values.SelectMany(company => company.Where(company => company is Factory));
             var subsetOrg = cities.Values.SelectMany(org => org.Where(org => org.NumEmployess >= 80));
             var unionSubsets = subsetCompany.Union(subsetOrg);
@@ -130,35 +130,37 @@ namespace Lab_OOP_14
                 Console.WriteLine(s);
         }
         //агрегирование данных
-        static void Queue4(SortedDictionary<int, Queue<Organization>> cities)
+        static void LinqQueue4(SortedDictionary<int, Queue<Organization>> cities)
         {
-            Console.WriteLine("Суммарное количество всех сотрудников в городе");
-            Console.WriteLine("С помощью LINQ: ");
             int subset = (from key in cities.Keys
                           from Organization org in cities[key]
                           select org.NumEmployess).Sum();
-            Console.WriteLine("Кол-во книг: " + subset);
-            Console.WriteLine("С помощью методов расширения: ");
+            Console.Write("\n---------Суммарное количество всех сотрудников в городе (С помощью Linq): " + subset);
+        }
+        static void ExtensionQueue4(SortedDictionary<int, Queue<Organization>> cities)
+        {
             int subsetMethod = cities.Values.SelectMany(org => org.Select(org => org.NumEmployess)).Sum();
-            Console.WriteLine("Кол-во книг: " + subsetMethod);
+            Console.Write("\n---------Суммарное количество всех сотрудников в городе (С помощью методов расширения): " + subsetMethod);
         }
         //Группировка данных
-        static void Queue5(SortedDictionary<int, Queue<Organization>> cities)
+        static void LinqQueue5(SortedDictionary<int, Queue<Organization>> cities)
         {
-            Console.WriteLine("Группировка по названию");
-            Console.WriteLine("С помощью LINQ: ");
+            Console.WriteLine("\n---------Группировка по названию (С помощью Linq): \n");
             var subset = (from key in cities.Keys
                           from Organization org in cities[key]
                           group org by org.Name into n
                           select new { Name = n.Key, Count = n.Count() }).ToList();
             foreach (var item in subset)
-                Console.WriteLine("С помощью LINQ: " + item.Name + " - " + item.Count);
-            Console.WriteLine("С помощью методов расширения: ");
+                Console.WriteLine(item.Name + " - " + item.Count);
+        }
+        static void ExtensionQueue5(SortedDictionary<int, Queue<Organization>> cities)
+        {
+            Console.WriteLine("\n---------Группировка по названию (С помощью методов расширения): \n");
             var subsetMethod = cities.Values.SelectMany(org => org)
                 .GroupBy(org => org.Name)
                 .Select(n => new { Name = n.Key, Count = n.Count() }).ToList();
             foreach (var item in subsetMethod)
-                Console.WriteLine("С помощью методов расширения: " + item.Name + " - " + item.Count);
+                Console.WriteLine(item.Name + " - " + item.Count);
         }
         //------------------------------
         //--------- 2 часть ------------
@@ -166,7 +168,7 @@ namespace Lab_OOP_14
         //На выборку данных по условию.
         static void TreeMethod1(BinarySearchTree<Organization> tree)
         {
-            Console.WriteLine("Название всех заводов");
+            Console.WriteLine("\n--------Название всех заводов\n");
             var subset = tree.SelectOrg(org => org is Factory);
             foreach (Organization s in subset)
                 Console.WriteLine(s);
@@ -174,23 +176,22 @@ namespace Lab_OOP_14
         //Агрегирование данных (среднее, максимум/минимум, сумма и пр.).
         static void TreeMethod2(BinarySearchTree<Organization> tree)
         {
-            Console.WriteLine("Кол-во всех сотрудников в библиотеках");
+            Console.Write("----------Кол-во всех сотрудников в библиотеках: ");
             var subset = tree.CountOrg(org => org is Library value && org.NumEmployess > 0);
             Console.WriteLine(subset);
         }
         //Сортировка коллекции (по убыванию/по возрастанию).
         static void TreeMethod3(BinarySearchTree<Organization> tree)
         {
-            Console.WriteLine("Сортировка по кол-ву сотрудников");
+            Console.WriteLine("\n------------Сортировка по кол-ву сотрудников\n");
             BinarySearchTree<Organization>  newTree = tree.SortOrg(org => org.NumEmployess);
             foreach (Organization s in newTree)
                 Console.WriteLine(s);
-            newTree.PrintTree();
         }
         //Группировка данных
         static void TreeMethod4(BinarySearchTree<Organization> tree)
         {
-            Console.WriteLine("Группировка по названию");
+            Console.WriteLine("\n----------Группировка по названию\n");
             var subset = tree.GroupOrg(org => org.Name).Select(n => new { Name = n.Key, Count = n.Count() }).ToList();
 
             foreach (var item in subset)
@@ -214,13 +215,28 @@ namespace Lab_OOP_14
                     cities[key].Enqueue(element);   
                 }
             }
-            Queue1(cities);
-            Queue2(cities);
-            Queue3(cities);
-            Queue4(cities);
-            Queue5(cities);
+            Console.WriteLine("\n\n-------- 1 часть -------\n\n");
 
-            BinarySearchTree<Organization> tree = CreateTreeRandom();
+            LinqQueue1(cities);
+            ExtensionQueue1(cities);
+
+            LinqQueue2(cities);
+            ExtensionQueue2(cities);
+            
+            LinqQueue3(cities);
+            ExtensionQueue3(cities);
+            
+            LinqQueue4(cities);
+            ExtensionQueue4(cities);
+            
+            LinqQueue5(cities);
+            ExtensionQueue5(cities);
+
+            Console.WriteLine("\n\n-------- 2 часть -------\n\n");
+            int size = Menu.InputInt("Введите размер дерева: ");
+            BinarySearchTree<Organization> tree = CreateTreeRandom(size);
+            Console.WriteLine("Созданное дерево:\n");
+            tree.PrintTree();
             TreeMethod1(tree);
             TreeMethod2(tree);
             TreeMethod3(tree);
