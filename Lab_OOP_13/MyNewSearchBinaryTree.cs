@@ -10,6 +10,7 @@ namespace Lab_OOP_13
     class MyNewSearchBinaryTree<T> : BinarySearchTree<Organization>
     {
         public string Name { get; } = "SearchTree";
+        public MyNewSearchBinaryTree(IComparer<Organization>? comparer = null) : base(comparer) { }
         //происходит при добавлении нового элемента или при удалении элемента
         public event CollectionHandler CollectionCountChanged;
         //объекту коллекции присваивается новое значение
@@ -72,24 +73,23 @@ namespace Lab_OOP_13
             {
                 var findItem = this[index];
                 OnCollectionReferenceChanged(this, new CollectionHandlerEventArgs(this.Name, "changed", value));
-                var inElem = this.FindNode(findItem, this.RootNode);
-                inElem.Data.Name = value.Name;
+                findItem.Name = value.Name;
             }
         }
-        public class CustomComparer : IComparer<Organization>
+    }
+    public class CustomComparer : IComparer<Organization>
+    {
+        public int Compare(Organization? organization1, Organization? organization2)
         {
-            public int Compare(Organization? organization1, Organization? organization2)
-            {
-                if (organization1 == null || organization2 == null)
-                    return 0;
+            if (organization1 == null || organization2 == null)
+                return 0;
 
-                if (organization1.NumEmployess > organization2.NumEmployess)
-                    return 1;
-                else if (organization1.NumEmployess < organization2.NumEmployess)
-                    return -1;
-                else
-                    return 0;
-            }
+            if (organization1.NumEmployess > organization2.NumEmployess)
+                return 1;
+            else if (organization1.NumEmployess < organization2.NumEmployess)
+                return -1;
+            else
+                return 0;
         }
     }
 }

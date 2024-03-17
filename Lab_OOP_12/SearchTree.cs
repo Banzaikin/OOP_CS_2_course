@@ -171,7 +171,7 @@ namespace Lab_OOP_12
         }
         public object Clone()
         {
-            return (object)new BinarySearchTree<T>(this);
+            return new BinarySearchTree<T>(this);
         }
         public object ShallowCopy()
         {

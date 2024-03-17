@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Lab_10;
+using Lab_OOP_12;
 
 namespace Lab_OOP_13
 {
@@ -8,8 +9,8 @@ namespace Lab_OOP_13
     {
         static void Main(string[] args)
         {
-            var tree1 = new MyNewSearchBinaryTree<Organization>();
-            var tree2 = new MyNewSearchBinaryTree<Organization>();
+            var tree1 = new MyNewSearchBinaryTree<Organization>(new CustomComparer());
+            var tree2 = new MyNewSearchBinaryTree<Organization>(new CustomComparer());
 
             var journal1 = new Journal();
             var journal2 = new Journal();
@@ -31,7 +32,7 @@ namespace Lab_OOP_13
             tree2.Remove(2);
             tree2.Remove(0);
 
-            var organization = new Organization("1", "1", 1);
+            Organization organization = new Organization("1", "1", 1);
             tree1[0] = organization;
             tree2[0] = organization;
 

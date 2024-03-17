@@ -62,7 +62,7 @@ namespace Lab_OOP_12
             else
                 Console.WriteLine("Организация не найдена");
         }
-        static void TaskClone(BinarySearchTree<Organization> tree)
+        static BinarySearchTree<Organization> TaskClone(BinarySearchTree<Organization> tree)
         {
             tree.Add(new Organization("1", "1", 1));
             var cloneTree = (BinarySearchTree<Organization>)tree.Clone();
@@ -75,6 +75,7 @@ namespace Lab_OOP_12
             tree.PrintTree();
             Console.WriteLine("Клонированное дерево после удаления: ");
             cloneTree.PrintTree();
+            return cloneTree;
         }
         static void TaskShallowCopy(BinarySearchTree<Organization> tree)
         {
@@ -94,6 +95,7 @@ namespace Lab_OOP_12
         public static void Main()
         {
             var tree = new BinarySearchTree<Organization>(new CustomComparer());
+            var cloneTree = new BinarySearchTree<Organization>(new CustomComparer());
             string[] menu = {
                 "1. Создание дерева (заполнение рандомными элементами)\n",
                 "2. Создание дерева (заполнение вручную)\n\n",
@@ -104,6 +106,7 @@ namespace Lab_OOP_12
                 "7. Поверхностное копирование (ShallowCopy)\n\n",
                 "8. Удаление коллекции из памяти (Clear)\n",
                 "9. Вывод дерева (Print)\n",
+                "10. Вывод клона\n",
                 "0. Выход из программы\n"
                 };
             int command;
@@ -136,7 +139,7 @@ namespace Lab_OOP_12
                         FindElement(tree);
                         break;
                     case 6: //Clone
-                        TaskClone(tree);
+                        cloneTree = TaskClone(tree);
                         break;
                     case 7: //ShallowCopy
                         TaskShallowCopy(tree);
@@ -146,6 +149,9 @@ namespace Lab_OOP_12
                         break;
                     case 9: //Print
                         tree.PrintTree();
+                        break;
+                    case 10: //вывод клона
+                        cloneTree.PrintTree();
                         break;
                     case 0:
                         Console.WriteLine("Программа успешно завершила работу");
