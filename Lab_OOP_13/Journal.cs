@@ -5,7 +5,7 @@ using Lab_10;
 
 namespace Lab_OOP_13
 {
-    class Journal
+    public class Journal
     {
         public List<JournalEntry> journal;
         public class JournalEntry
@@ -28,6 +28,10 @@ namespace Lab_OOP_13
         {
             journal = new List<JournalEntry>();
         }
+        public void Add(JournalEntry je)
+        {
+            journal.Add(je);
+        }
         public override string ToString()
         {
             string outStr = "";
@@ -38,12 +42,12 @@ namespace Lab_OOP_13
         public void CollectionCountChanged(object sourse, CollectionHandlerEventArgs e)
         {
             JournalEntry je = new JournalEntry(e.NameCollection, e.TypeChanged, e.LinkObj.ToString());
-            journal.Add(je);
+            this.Add(je);
         }
         public void CollectionReferenceChanged(object sourse, CollectionHandlerEventArgs e)
         {
             JournalEntry je = new JournalEntry(e.NameCollection, e.TypeChanged, e.LinkObj.ToString());
-            journal.Add(je);
+            this.Add(je);
         }
     }
 }

@@ -24,12 +24,16 @@ namespace Lab_OOP_13
             var organizations = new Organization[3];
             for (int i = 0; i < 3; i++)
                 organizations[i] = new Organization();
+            Console.WriteLine("Список добавляемых элементов: ");
+            foreach (var org in organizations)
+                Console.WriteLine(org);
+            Console.WriteLine();
             tree1.AddRange(organizations);
             tree2.AddRange(organizations);
 
-            tree1.Remove(2);
+            tree1.Remove(organizations[1]);
             tree1.Remove(0);
-            tree2.Remove(2);
+            tree2.Remove(organizations[1]);
             tree2.Remove(0);
 
             Organization organization = new Organization("1", "1", 1);

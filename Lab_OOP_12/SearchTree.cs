@@ -152,17 +152,17 @@ namespace Lab_OOP_12
                 return itemNode.Data;
             return default;
         }
-        public Node<T> FindNode(T data, Node<T> startWithNode = null)
+        public Node<T>? FindNode(T data, Node<T> startWithNode = null)
         {
             if (startWithNode == null)
                 return null;
-            int result = data.CompareTo(startWithNode.Data);
+            int result = Comparer.Compare(data, startWithNode.Data);
             if (result == 0)
                 return startWithNode;
             else if (result < 0)
-                return FindNode(data, startWithNode.Left);
-            else
                 return FindNode(data, startWithNode.Right);
+            else
+                return FindNode(data, startWithNode.Left);
         }
         public void Clear()
         {

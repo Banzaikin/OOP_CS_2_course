@@ -5,7 +5,7 @@ using Lab_10;
 
 namespace Lab_OOP_13
 {
-    class CollectionHandlerEventArgs : System.EventArgs
+    public class CollectionHandlerEventArgs : System.EventArgs
     {
         public string NameCollection { get; set; }
         public string TypeChanged {get; set; }
@@ -14,7 +14,7 @@ namespace Lab_OOP_13
         {
             this.NameCollection = NameCollection;
             this.TypeChanged = TypeChanged;
-            this.LinkObj = LinkObj;
+            this.LinkObj = LinkObj ?? default!;
         }
         public override string ToString()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Lab_10;
 using Lab_OOP_12;
@@ -27,15 +28,22 @@ namespace Lab_OOP_13
             if (CollectionReferenceChanged != null)
                 CollectionReferenceChanged(source, args);
         }
-        public bool Remove(int j)
+        private bool CheckIndex(int index)
         {
-            if ((j > 0) && (j < this.Count - 1))
-            {
-                var findItem = this[j];
-                Remove(findItem);
-                return true;
-            }
-            return false;
+            if (index > this.Count - 1)
+                return false;
+            else if (index < 0)
+                return false;
+            return true;
+        }
+        public bool Remove(int index)
+        {
+            if (!CheckIndex(index))
+                return false;
+
+            var findElem = this[index];
+            Remove(findElem);
+            return true;
         }
         public override bool Remove(Organization org)
         {
@@ -56,13 +64,13 @@ namespace Lab_OOP_13
         {
             get
             {
-                Organization org = default;
+                Organization org = default!;
                 int count = 0;
                 foreach(Organization item in this)
                 {
+                    org = item;
                     if (count == index)
                     {
-                        org = item;
                         break;
                     }
                     count++;
