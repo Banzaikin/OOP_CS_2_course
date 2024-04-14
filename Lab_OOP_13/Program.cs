@@ -15,6 +15,8 @@ namespace Lab_OOP_13
             var journal1 = new Journal();
             var journal2 = new Journal();
 
+
+
             tree1.CollectionCountChanged += new CollectionHandler(journal1.CollectionCountChanged);
             tree1.CollectionReferenceChanged += new CollectionHandler(journal1.CollectionReferenceChanged);
 
