@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>_12lab_Shalnev</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="lab10lib_Shalnev">
+      <HintPath>..\..\lab10lib_Shalnev\lab10lib_Shalnev\obj\Debug\net7.0\lab10lib_Shalnev.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

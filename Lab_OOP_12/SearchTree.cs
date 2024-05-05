@@ -10,6 +10,7 @@ namespace Lab_OOP_12
         LeftSide,
         RightSide
     }
+    [Serializable]
     public class Node<T> 
         where T : IComparable, ICloneable
     {
@@ -25,6 +26,7 @@ namespace Lab_OOP_12
         public Node<T> Parent { get; set; }
         public override string ToString() => Data.ToString();
     }
+    [Serializable]
     public class BinarySearchTree<T> : ICollection<T>, IEnumerable<T>, ICloneable
        where T : IComparable, ICloneable
     {
@@ -164,7 +166,7 @@ namespace Lab_OOP_12
             else
                 return FindNode(data, startWithNode.Left);
         }
-        public void Clear()
+        public virtual void Clear()
         {
             RootNode = null;
             Count = 0;
@@ -195,17 +197,26 @@ namespace Lab_OOP_12
         {
             PrintTree(RootNode);
         }
-        private void PrintTree(Node<T> startNode, string indent = "", Side? side = null)
+        public override string ToString()
         {
+            if (Count == 0)
+                return "Дерево пустое";
+            else
+                return PrintTree(RootNode);
+        }
+        private string PrintTree(Node<T> startNode, string indent = "", Side? side = null)
+        {
+            string result = "";
             if (startNode != null)
             {
                 var nodeSide = side == null ? "+" : side == Side.LeftSide ? "R" : "L";
-                Console.WriteLine($"{indent} [{nodeSide}]- {startNode.Data}");
+                result += ($"{indent} [{nodeSide}]- {startNode.Data}");
                 indent += new string(' ', 3);
                 //рекурсивный вызов для левой и правой веток
-                PrintTree(startNode.Left, indent, Side.LeftSide);
-                PrintTree(startNode.Right, indent, Side.RightSide);
+                result += PrintTree(startNode.Left, indent, Side.LeftSide);
+                result += PrintTree(startNode.Right, indent, Side.RightSide);
             }
+            return result;
         }
         IEnumerator IEnumerable.GetEnumerator()
         {

@@ -8,7 +8,6 @@ namespace Lab_OOP_15
 
         static readonly Random rnd = new();
 
-        Thread threadMine;
         List<Thread> threads; // юниты (потоки)
 
         int portion = 10; // сколько добывают юниты (равные порции)
@@ -50,7 +49,6 @@ namespace Lab_OOP_15
                         }
                         break;
                     }
-
                     
                     Invoke(() => UpdateText($"{nameUnit} добыл {portion} ед. золота, в пути: {(double)timeDelay / 1000}с."));
                     Invoke(UpdateTextCount);
@@ -171,7 +169,6 @@ namespace Lab_OOP_15
             {
                 if (thread.ThreadState == ThreadState.Unstarted)
                 {
-                    thread.IsBackground = true; // потоки в фоновом режиме - завершается основной. завершается и он.
                     thread.Start();
                 }
             }

@@ -162,6 +162,7 @@ namespace Lab_OOP_12
             } while (command != 0);
         }
     }
+    [Serializable]
     public class CustomComparer : IComparer<Organization>
     {
         public int Compare(Organization? organization1, Organization? organization2)
